@@ -214,19 +214,19 @@
                 const response = await axios.get('http://localhost:8088/categorie/getAll', { headers });
                 if (response.status === 200) {
                     const categories = response.data;
+                    
 
                     const tableBody = document.getElementById('table-body');
                     tableBody.innerHTML = '';
 
                     categories.forEach(categorie => {                        
                         const tableRow = document.createElement('tr');
-                        // <img src="data:image/jpeg;base64,${product.thumbnail}" class="img-fluid" style="max-width: 50px;">
                         tableRow.innerHTML = `
                            <td class="align-middle">
-    
+                                <img src="data:image/jpeg;base64,${categorie.photo}" class="img-fluid" style="max-width: 50px;">
                                 <span>${categorie.nom}</span>
                             </td>  
-                            <td class="align-middle" colspan="2">categorie.description</td>
+                            <td class="align-middle" colspan="2">${categorie.description}</td>
                             <td class="align-middle"><strong>${categorie.produits.length}</strong></td>
                             <td class="align-middle">
                               <abbr title="Supprimer">

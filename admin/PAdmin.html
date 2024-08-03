@@ -217,11 +217,13 @@
                 const response = await axios.get('http://localhost:8088/produit/getAll', { headers });
                 if (response.status === 200) {
                     const products = response.data;
+                    
 
                     const tableBody = document.getElementById('table-body');
                     tableBody.innerHTML = '';
 
                     products.forEach(product => {
+
                         let gramEntries = '';
                         let prixEntries = ''
 

@@ -188,14 +188,9 @@
                     document.getElementById('description').value = product.description;
                     document.getElementById('qtt').value = product.qtt;
                     document.getElementById('remise').value = product.remise;
-                    product.prixList.reverse();
-                    
-                    
-                    
+                                        
                     const prixListContainer = document.getElementById('prixListContainer');
                     prixListContainer.innerHTML = '<h9>Grammage et Prix</h9>';
-                    console.log(product.prixList.reverse());
-                    console.log(product.prixList);
                     product.prixList.forEach(prix => {
                         const prixEntry = document.createElement('div');
                         prixEntry.className = 'prixEntry';

@@ -121,7 +121,7 @@
                     </div>
                     <div class="form-group">
                         <label for="photo">Image du catégorie</label>
-                        <input type="file" class="form-control-file" id="photo" name="photo" required>
+                        <input type="file" class="form-control-file" id="photo" name="photo">
                     </div>
                 </div>
                 <div class="form-col">
@@ -163,6 +163,7 @@
                 if (response.status === 200) {
                     const categorie = response.data;
                     document.getElementById('nom').value = categorie.nom;
+                    document.getElementById('description').value = categorie.description;
                 } else {
                     console.error('Erreur lors de la récupération des données');
                 }
@@ -172,8 +173,8 @@
 
             form.addEventListener('submit', async function (event) {
                 event.preventDefault();
-
-                const nom = document.getElementById('nom').value;
+                const formData = new FormData(form);
+                // const nom = document.getElementById('nom').value;
 
                 try {
                     const token = localStorage.getItem('adminToken');
@@ -182,7 +183,7 @@
                         'Content-Type': 'application/json'
                     };
 
-                    const response = await axios.put(`http://localhost:8088/categorie/update/${categorieId}`, { nom }, { headers });
+                    const response = await axios.put(`http://localhost:8088/categorie/update/${categorieId}`, formData, { headers });
 
                     if (response.status === 200) {
                         alert('Catégorie mis à jour avec succès !');

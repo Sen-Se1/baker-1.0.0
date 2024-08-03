@@ -148,7 +148,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             checkIfLoggedIn();
-            initProductFormSubmission();
+            initCatgeorieFormSubmission();
         });
 
         function checkIfLoggedIn() {
@@ -175,14 +175,22 @@
                     const token = localStorage.getItem('adminToken');
                     const headers = {
                         Authorization: `Bearer ${token}`,
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'multipart/form-data'
                     };
 
+                      // console log formData
+                        for (let [key, value] of formData.entries()) {
+                            if (value instanceof File) {
+                                console.log(`${key}: ${value.name} (${value.size} bytes)`);
+                            } else {
+                                console.log(`${key}: ${value}`);
+                            }
+                        }
                     const response = await axios.post('http://localhost:8088/categorie/save', formData, { headers });
 
                     if (response.status === 200) {
                         alert("Catégorie ajouté avec succès");
-                        productForm.reset();
+                        catgeorieForm.reset();
                     }
                 } catch (error) {
                     console.error('Erreur lors de l\'ajout du catégorie:', error);

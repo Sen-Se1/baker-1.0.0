@@ -243,7 +243,7 @@
                     //     }
                     // }
 
-                    const response = await axios.post('http://localhost:8088/produit/save2', formData, { headers });
+                    const response = await axios.post('http://localhost:8088/produit/save', formData, { headers });
 
                     if (response.status === 200) {
                         alert("Produit ajouté avec succès");
