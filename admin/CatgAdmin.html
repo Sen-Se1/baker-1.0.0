@@ -171,6 +171,8 @@
                     <thead>
                         <tr>
                             <th scope="col">Nom</th>
+                            <th scope="col" colspan="2">Description</th>
+                            <th scope="col">Nombre des Produits</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -216,10 +218,16 @@
                     const tableBody = document.getElementById('table-body');
                     tableBody.innerHTML = '';
 
-                    categories.forEach(categorie => {
+                    categories.forEach(categorie => {                        
                         const tableRow = document.createElement('tr');
+                        // <img src="data:image/jpeg;base64,${product.thumbnail}" class="img-fluid" style="max-width: 50px;">
                         tableRow.innerHTML = `
-                            <td class="align-middle">${categorie.nom}</td>     
+                           <td class="align-middle">
+    
+                                <span>${categorie.nom}</span>
+                            </td>  
+                            <td class="align-middle" colspan="2">categorie.description</td>
+                            <td class="align-middle"><strong>${categorie.produits.length}</strong></td>
                             <td class="align-middle">
                               <abbr title="Supprimer">
                                 <i class="bi bi-trash" data-product-id="${categorie.id}" style="cursor: pointer;"></i></abbr>&nbsp;&nbsp;&nbsp;

@@ -113,7 +113,19 @@
                         <label for="nom">Nom du catégorie</label>
                         <input type="text" class="form-control" id="nom" name="nom"
                             placeholder="Entrez le nom du catégorie" required>
-                    </div>       
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"
+                            placeholder="Entrez la description du catégorie"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="photo">Image du catégorie</label>
+                        <input type="file" class="form-control-file" id="photo" name="photo" required>
+                    </div>
+                </div>
+                <div class="form-col">
+
                 </div>
             </div>
             <div class="form-row">
@@ -149,7 +161,7 @@
             }
         }
 
-    
+
 
         function initCatgeorieFormSubmission() {
             const catgeorieForm = document.getElementById('catgeorieForm');
@@ -179,7 +191,7 @@
             });
         }
 
- 
+
 
         document.getElementById('logout').addEventListener('click', () => {
             localStorage.removeItem('adminToken');
