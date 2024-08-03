@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Galai - best honey in ur city</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    main {
+      align-items: center;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .container {
+      align-items: center;
+      margin: auto;
+      padding-top: 100px;
+      padding-bottom: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      margin-left: -40px;
+      gap: 30px;
+
+    }
+
+    .c1 {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      margin-left: 0;
+      float: left;
+      gap: 30px;
+      padding-top: 20px;
+      padding-bottom: 100px;
+      margin-left: 5%;
+      margin-top: 5%;
+      width: 100%;
+    }
+
+    form,
+    .f1 {
+      gap: 10px;
+      align-items: center;
+    }
+
+    .f1 {
+      width: 40%;
+    }
+
+    span {
+      color: #e74c3c;
+      font-size: 13px;
+      display: block;
+    }
+
+    .mtp {
+      font-size: 13px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    img {
+      width: 15%;
+      box-shadow: #e74c3c;
+    }
+
+    .imj {
+      width: 100%
+    }
+
+    .bttn {
+      background-color: #FF8B2B;
+      border: none;
+    }
+
+    .bttn:hover {
+      background-color: #512524;
+    }
+
+    .imj1 {
+      width: 100%
+    }
+
+    .txt,
+    .ins {
+      font-size: 14px;
+      font-weight: lighter;
+
+    }
+
+    .img {
+      width: 150px;
+    }
+
+    @media (max-width:990px) {
+
+      .imj1 {
+        display: none;
+      }
+
+      main {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .container {
+        margin-left: 0;
+        margin: 0;
+        padding: 0;
+        padding-top: 30px;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .c1 {
+        padding: 0;
+        margin: 0;
+        padding-top: 50px;
+      }
+
+      .f1 {
+        width: 80%;
+      }
+
+      .f {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="c1">
+      <img src="../img/logoPng1.png" class="img" alt="logo Galai Miel" />
+      <h3>Bienvenue de Nouveau!</h3>
+      <form id="loginForm" class="f1">
+        <div class="col">
+          <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping">@</span>
+            <input type="text" class="form-control" placeholder="Adresse mail" aria-label="Username"
+              aria-describedby="addon-wrapping" name="email1" id="email1" />
+          </div>
+          <span class="span" id="emailError"></span>
+        </div>
+        <br />
+        <div class="col">
+          <input type="password" class="form-control" placeholder="Mot de passe" name="password1" id="password1" />
+          <span id="passwordError"></span>
+        </div>
+
+        <p class="mtp">&nbsp;&nbsp;&nbsp;&nbsp;Mot de passe oublié ?</p>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button class="btn btn-secondary bttn" type="submit">Se Connecter</button>
+          <p class="ins">Vous n'avez pas de compte ? &nbsp;<a href="inscription .html">S'inscrire</a></p>
+        </div>
+
+      </form>
+    </div>
+    <div class="imj1">
+      <img class="imj1" src="../img/logoPng.png" alt="" />
+
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script>
+    function checkIfLoggedIn() {
+      const token = localStorage.getItem('adminToken');
+      if (token) {
+        alert('User is logged in');
+        window.location.href = 'PAdmin.html';
+      } else {
+        console.log('You are not logged in!');
+      }
+    }
+    checkIfLoggedIn();
+    document.getElementById('loginForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const emailInput = document.getElementById('email1');
+      const passwordInput = document.getElementById('password1');
+      const emailError = document.getElementById('emailError');
+      const passwordError = document.getElementById('passwordError');
+
+      let errors = {};
+
+      if (!emailInput.value.trim()) {
+        errors.email1 = "Votre email est obligatoire";
+      } else if (!/\S+@\S+\.\S+/.test(emailInput.value)) {
+        errors.email1 = "Email n'est pas valide";
+      }
+
+      if (!passwordInput.value.trim()) {
+        errors.password1 = "Mot de passe est obligatoire";
+      } else if (passwordInput.value.length < 6) {
+        errors.password1 = "Le mot de passe doit être d’au moins 6 caractères";
+      }
+
+      emailError.textContent = errors.email1 || '';
+      passwordError.textContent = errors.password1 || '';
+
+      if (Object.keys(errors).length === 0) {
+        try {
+          const response = await axios.post('http://localhost:8088/login', {
+            username: emailInput.value,
+            password: passwordInput.value
+          });
+
+          if (response.status === 200) {
+            const data = response.data;
+
+            access_token = localStorage.setItem('adminToken', data.token);
+
+            window.location.href = 'PAdmin.html';
+          } else {
+            passwordError.textContent = "L'email ou le mot de passe ne sont pas valides";
+          }
+        } catch (error) {
+          passwordError.textContent = "Erreur lors de la connexion";
+          console.error(error);
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
