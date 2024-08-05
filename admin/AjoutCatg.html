@@ -35,22 +35,16 @@
         .cnt1 {
             width: 100%;
             margin: auto;
-            padding: 20px;
+            align-items: center;
+            justify-content: center;
             border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .form-group {
             margin-bottom: 15px;
-        }
-
-        .prixEntry {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .removePriceBtn {
-            align-self: center;
         }
 
         .form-control.input {
@@ -105,9 +99,8 @@
     <!-- Page Header End -->
 
     <div class="container mt-5 cnt1">
-        <h3>Ajouter une catégorie</h3>
         <form id="catgeorieForm">
-            <div style="display: flex; gap: 10px;">
+            <h5 >Ajouter une catégorie</h3>
                 <div class="form-col">
                     <div class="form-group">
                         <label for="nom">Nom du catégorie</label>
@@ -124,10 +117,7 @@
                         <input type="file" class="form-control-file" id="photo" name="photo" required>
                     </div>
                 </div>
-                <div class="form-col">
-
-                </div>
-            </div>
+                
             <div class="form-row">
                 <button type="submit" class="btn btn-primary">Ajouter une catégorie</button>
             </div>
