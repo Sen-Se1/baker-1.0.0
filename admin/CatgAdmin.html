@@ -207,7 +207,11 @@
         checkIfLoggedIn()
         async function fetchCategories() {
             try {
-                const response = await axios.get('http://localhost:8088/categorie/getAll');
+                const token = localStorage.getItem('adminToken');
+                const headers = {
+                    Authorization: `Bearer ${token}`
+                };
+                const response = await axios.get('http://localhost:8088/categorie/admin/getAll/withoutProdPhotos', { headers });
                 if (response.status === 200) {
                     const categories = response.data;
                     
@@ -222,7 +226,7 @@
                                 <span>${categorie.nom}</span>
                             </td>  
                             <td class="align-middle" colspan="2">${categorie.description}</td>
-                            <td class="align-middle"><strong>${categorie.produits.length}</strong></td>
+                            <td class="align-middle"><strong>${categorie.nbProduit}</strong></td>
                             <td class="align-middle">
                               <abbr title="Supprimer">
                                 <i class="bi bi-trash" data-product-id="${categorie.id}" style="cursor: pointer;"></i></abbr>&nbsp;&nbsp;&nbsp;
@@ -251,7 +255,7 @@
                             Authorization: `Bearer ${token}`
                         };
 
-                        const response = await axios.delete(`http://localhost:8088/categorie/delete/${productId}`, { headers });
+                        const response = await axios.delete(`http://localhost:8088/categorie/admin/delete/${productId}`, { headers });
                         if (response.status === 200) {
                             const row = event.target.closest('tr');
                             if (row) {

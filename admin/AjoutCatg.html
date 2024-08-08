@@ -176,7 +176,7 @@
                                 console.log(`${key}: ${value}`);
                             }
                         }
-                    const response = await axios.post('http://localhost:8088/categorie/save', formData, { headers });
+                    const response = await axios.post('http://localhost:8088/categorie/admin/save', formData, { headers });
 
                     if (response.status === 200) {
                         alert("Catégorie ajouté avec succès");

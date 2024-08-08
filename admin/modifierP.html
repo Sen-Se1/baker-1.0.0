@@ -119,11 +119,11 @@
                         <textarea class="form-control" id="description" name="description" rows="3"
                             placeholder="Entrez la description du produit"></textarea>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="qtt">Quantité</label>
                         <input type="number" class="form-control" id="qtt" name="qtt"
                             placeholder="Entrez la quantité du produit" required>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="thumbnail">vignette du produit</label>
                         <input type="file" class="form-control-file" id="thumbnail" name="thumbnail">
@@ -132,16 +132,16 @@
                         <label for="photos">Image du produit</label>
                         <input type="file" class="form-control-file" id="photos" name="photos" multiple>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="remise">Remise</label>
                         <input type="number" class="form-control" id="remise" name="remise"
                             placeholder="Entrez la remise du produit" required>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="form-col ">
                     <div class="form-group">
                         <label for="categorie">Catégorie</label>
-                        <select class="form-control" id="categorie" name="categorie" required>
+                        <select class="form-control" id="categorie" name="categorieId" required>
                         </select>
                     </div>
                     <div id="prixListContainer"></div>
@@ -173,7 +173,12 @@
             const productId = urlParams.get('productId');
 
             try {
-                const response = await axios.get(`http://localhost:8088/produit/getById/${productId}`);
+                const token = localStorage.getItem('adminToken');
+                const headers = {
+                    Authorization: `Bearer ${token}`
+                };
+
+                const response = await axios.get(`http://localhost:8088/produit/admin/getById/CategorieName/withoutFiles/${productId}`, { headers });
 
                 if (response.status === 200) {
                     const product = response.data;
@@ -181,8 +186,8 @@
 
                     document.getElementById('nom').value = product.nom;
                     document.getElementById('description').value = product.description;
-                    document.getElementById('qtt').value = product.qtt;
-                    document.getElementById('remise').value = product.remise;
+                    // document.getElementById('qtt').value = product.qtt;
+                    // document.getElementById('remise').value = product.remise;
                                         
                     const prixListContainer = document.getElementById('prixListContainer');
                     prixListContainer.innerHTML = '<h9>Grammage et Prix</h9>';
@@ -193,6 +198,8 @@
                         prixEntry.innerHTML = `
                             <input type="number" class="form-control input" name="grammage" value="${prix.grammage}" placeholder="Grammage" step="0.01" required>
                             <input type="number" class="form-control input" name="prix" value="${prix.prix}" placeholder="Prix" step="0.01" required>
+                            <input type="number" class="form-control input" name="qtt" value="${prix.qtt}" placeholder="qtt" step="0.01" required>
+                            <input type="number" class="form-control input" name="remise" value="${prix.remise}" placeholder="remise" step="0.01" required>
                             <button type="button" class="btn btn-danger removePriceBtn">Supprimer</button>
                         `;
                         prixListContainer.appendChild(prixEntry);
@@ -210,6 +217,8 @@
                 prixEntry.innerHTML = `
                     <input type="number" class="form-control input" name="grammage" placeholder="Grammage" step="0.01" required>
                     <input type="number" class="form-control input" name="prix" placeholder="Prix" step="0.01" required>
+                    <input type="number" class="form-control input" name="qtt" placeholder="qtt" step="0.01" required>
+                    <input type="number" class="form-control input" name="remise" placeholder="remise" step="0.01" required>
                     <button type="button" class="btn btn-danger removePriceBtn">Supprimer</button>
                 `;
                 document.getElementById('prixListContainer').appendChild(prixEntry);
@@ -229,7 +238,7 @@
                                 'Content-Type': 'application/json'
                             };
 
-                            const response = await axios.delete(`http://localhost:8088/produit/prix/delete/${prixId}/${productId}`, { headers });
+                            const response = await axios.delete(`http://localhost:8088/produit/admin/prix/delete/${prixId}/${productId}`, { headers });
 
                             if (response.status === 200) {
                                 prixEntry.remove();
@@ -253,7 +262,9 @@
 
                 const prixEntries = Array.from(document.querySelectorAll('.prixEntry')).map(entry => ({
                     grammage: parseFloat(entry.querySelector('input[name="grammage"]').value),
-                    prix: parseFloat(entry.querySelector('input[name="prix"]').value)
+                    prix: parseFloat(entry.querySelector('input[name="prix"]').value),
+                    qtt: parseFloat(entry.querySelector('input[name="qtt"]').value),
+                    remise: parseFloat(entry.querySelector('input[name="remise"]').value)
                 }));
 
                 formData.append('prixList', JSON.stringify(prixEntries));
@@ -265,7 +276,7 @@
                         'Content-Type': 'application/json'
                     };
 
-                    const response = await axios.put(`http://localhost:8088/produit/update/${productId}`, formData, { headers });
+                    const response = await axios.put(`http://localhost:8088/produit/admin/update/${productId}`, formData, { headers });
 
                     if (response.status === 200) {
                         alert('Produit mis à jour avec succès !');
@@ -281,7 +292,7 @@
 
         async function loadCategories(id) {
             try {
-                const response = await axios.get('http://localhost:8088/categorie/getAll');
+                const response = await axios.get('http://localhost:8088/categorie/admin/getAllName');
                 const categories = response.data;
                 
                 const categorieSelect = document.getElementById('categorie');

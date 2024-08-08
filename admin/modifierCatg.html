@@ -162,7 +162,12 @@
             const urlParams = new URLSearchParams(window.location.search);
             const categorieId = urlParams.get('categorieId');
             try {
-                const response = await axios.get(`http://localhost:8088/categorie/getById/${categorieId}`);
+                const token = localStorage.getItem('adminToken');
+                const headers = {
+                    Authorization: `Bearer ${token}`
+                };
+
+                const response = await axios.get(`http://localhost:8088/categorie/admin/getById/withoutProduit/${categorieId}`, { headers });
 
                 if (response.status === 200) {
                     const categorie = response.data;
@@ -188,7 +193,7 @@
                         Authorization: `Bearer ${token}`
                     };
 
-                    const response = await axios.put(`http://localhost:8088/categorie/update/${categorieId}`, formData, { headers });
+                    const response = await axios.put(`http://localhost:8088/categorie/admin/update/${categorieId}`, formData, { headers });
 
                     if (response.status === 200) {
                         alert('Catégorie mise à jour avec succès !');

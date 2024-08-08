@@ -211,7 +211,7 @@
         const headers = {
           Authorization: `Bearer ${token}`
         };
-        const response = await axios.get('http://localhost:8088/commande/getAll', { headers });
+        const response = await axios.get('http://localhost:8088/commande/admin/getAll', { headers });
         if (response.status === 200) {
           const commandes = response.data;
           commandes.sort((a, b) => new Date(b.dateCreation) - new Date(a.dateCreation));
@@ -222,13 +222,23 @@
           commandes.forEach(commande => {
             let corProduit = '';
 
+            const dateObj = new Date(commande.dateCreation);
+            const year = dateObj.getFullYear();
+            const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+            const day = String(dateObj.getDate()).padStart(2, '0');
+            const hours = String(dateObj.getHours()).padStart(2, '0');
+            const minutes = String(dateObj.getMinutes()).padStart(2, '0');
+            const seconds = String(dateObj.getSeconds()).padStart(2, '0');
+
+            const formattedDate = `${year}-${month}-${day} ${hours}-${minutes}-${seconds}`;
+
             commande.lignesCommande.forEach(prix => {
-              corProduit += `<div><strong>${prix.nomProduit}</strong> - ${prix.qte} - ${prix.grammage} - ${prix.prix} DT</div>`;
+              corProduit += `<div><strong>${prix.produit.nom}</strong> / ${prix.qtt} / ${prix.grammage} / ${prix.prix} DT</div>`;
             });
 
             const tableRow = document.createElement('tr');
             tableRow.innerHTML = `
-                    <td class="align-middle">${commande.dateCreation}</td>
+                  <td class="align-middle">${formattedDate}</td>
                   <td class="align-middle">${commande.nom}</td>
                   <td class="align-middle"><strong>${commande.prenom}</strong></td>
                   <td class="align-middle">${commande.adresse}</td>

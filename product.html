@@ -30,6 +30,21 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <!-- Axios CDN -->
+    <style>
+    .btn-selected {
+        box-shadow: 0 4px 8px #0c0c0c;
+            border: 1px solid #151515; 
+    }
+    .sold-out {
+        color: black;
+  font-weight: bold;
+  text-decoration: line-through;
+  padding: 2px 4px; /* add some padding */
+  border-radius: 4px; /* add a border radius */
+}
+    </style>
 </head>
 
 <body>
@@ -119,640 +134,45 @@
 
 
 <!--product start-->
-<div class="container-xxl bg-white my-6 py-6 pt-0" >
+<div class="container-xxl bg-white my-6 py-6 pt-0 ">
     <div class="container ">
         <br>
         <div class="mb-5 search">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <form class="form-inline">
-                        <div class="input-group">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Rechercher..." aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-primary" type="submit">
-                                    <i class="bi bi-search"></i>
-                                </button>
+            <div class="mb-5 search">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <form class="form-inline">
+                            <div class="input-group">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Rechercher..." aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="submit">
+                                        <i class="bi bi-search"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
-
+    
+            </div>        
         </div>
+        <!-- <div class="carousel-centered" style="width: 100%;">  -->
 
-        <div id="carouselExample" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item  active ">
-                    <div class="row sp justify-content-center align-items-center ">
-                    
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-1.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">العسل الحر</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-2.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">العسل والرياضة</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-3.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">خلطات العسل</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-1.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">خلطات العسل</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-2.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">خلطات العسل</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row sp justify-content-center align-items-center ">
-                    
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-3.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">العسل الحر</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-1.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">العسل والرياضة</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-2.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">خلطات العسل</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-3.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">خلطات العسل</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-1.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">خلطات العسل</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="row sp justify-content-center align-items-center ">
-                    
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-2.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">العسل الحر</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-2.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">العسل والرياضة</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-3.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">خلطات العسل</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-1.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">خلطات العسل</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-2.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">خلطات العسل</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="row sp justify-content-center align-items-center ">
-                    
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-1.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">العسل الحر</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-3.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">العسل والرياضة</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-1.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">خلطات العسل</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-2.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">خلطات العسل</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="siWajih margin">
-                            <div class="card small-square-card custom-card">
-                                <img src="img/product-3.jpg" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">خلطات العسل</h5>
-                                    <p class="card-text description-1 active">
-                                        <strong> 
-                                            ابتداء من  <span style="color: gray; text-decoration: line-through;" >  31,000 د.ت</span><span style=" font-weight: bold;">  25,000 د.ت</span>    
-                                        </strong>
-                                    </p>
-                                    <p class="card-text description-2"><strong> 
-                                        ابتداء من  <span style=" font-weight: bold;">  65,000 د.ت</span>    
-                                    </strong></p>
-                                    <p class="card-text description-3">
-                                    <strong> 
-                                        ابتداء من  <span style="color: gray; text-decoration: line-through;" >  500 د.ت</span><span style=" font-weight: bold;">  460 د.ت</span>    
-                                    </strong>
-                                </p>
-                                <p>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                                    <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                                </p>
-                                    <div class="basket-icon-wrapper">
-                                        <i class="bi bi-basket2-fill basket-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="productCarousel" class="carousel slide ">
+            <div class="carousel-inner " id="carousel-inner">
+                <!-- Les diapositives seront insérées ici -->
             </div>
             <div class="custom-pagination">
-                <a href="#carouselExample" role="button" data-slide="prev">&laquo;</a>
-                <span data-slide-to="0" class="active">1</span>
-                <span data-slide-to="1">2</span>
-                <span data-slide-to="1">3</span>
-
-                <a href="#carouselExample" role="button" data-slide="next">&raquo;</a>
+                <a href="#productCarousel" role="button" data-bs-slide="prev">&laquo;</a>
+                <!-- Les points de pagination seront insérés ici -->
+                <a href="#productCarousel" role="button" data-bs-slide="next">&raquo;</a>
             </div>
+            
         </div>
+        <!-- </div> -->
     </div>
 </div>
+
 <!-- Product End -->
 
 <!-- Footer Start -->
@@ -773,56 +193,47 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Quick Links</h4>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Our Services</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">Support</a>
+                    <a class="btn btn-link" href="about.html">About Us</a>
+                    <a class="btn btn-link" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link" href="service.html">Our Services</a>
+                    <a class="btn btn-link" href="team.html">Meet The Team</a>
+                    <a class="btn btn-link" href="testimonial.html">Latest Blog</a>
                 </div>
-             
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Photo Gallery</h4>
-                    <div class="row g-2">
-                        <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="img/product-1.jpg" alt="Image">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="img/product-2.jpg" alt="Image">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="img/product-3.jpg" alt="Image">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="img/product-2.jpg" alt="Image">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="img/product-3.jpg" alt="Image">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light rounded p-1" src="img/product-1.jpg" alt="Image">
-                        </div>
+                    <h4 class="text-light mb-4">Popular Links</h4>
+                    <a class="btn btn-link" href="about.html">About Us</a>
+                    <a class="btn btn-link" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link" href="service.html">Our Services</a>
+                    <a class="btn btn-link" href="team.html">Meet The Team</a>
+                    <a class="btn btn-link" href="testimonial.html">Latest Blog</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Newsletter</h4>
+                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid text-light py-4" style="background: #051225;">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">Your Site Name</a>. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">Designed by <a class="text-white border-bottom" href="https://htmlcodex.com">HTML Codex</a></p>
                 </div>
             </div>
         </div>
     </div>
     <!-- Footer End -->
 
-
-    <!-- Copyright Start -->
-    <div class="container-fluid copyright text-light py-4 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy;2023 – <a href="#">Miel Galai</a>, Tous droits réservés.
-                </div> 
-        </div>
-    </div>
-    <!-- Copyright End -->
-
-
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
-
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -830,45 +241,139 @@
     <script src="lib/wow/wow.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!--script de slides et bouttons-->
-<script>
-    
-      $(document).ready(function() {
-    $('.custom-pagination span').on('click', function() {
-      var index = $(this).data('slide-to');
-      $('#carouselExample').carousel(index);
-      $('.custom-pagination span').removeClass('active');
-      $(this).addClass('active');
-    });
-
-    $('#carouselExample').on('slide.bs.carousel', function (e) {
-      var index = $(e.relatedTarget).index();
-      $('.custom-pagination span').removeClass('active');
-      $('.custom-pagination span').eq(index).addClass('active');
-    });
-  });
-
-  $(document).ready(function() {
-    $('.card-text').not('.active').hide();
-
-    $('.toggle-description').click(function() {
-      var target = $(this).data('target');
-      var cardBody = $(this).closest('.card-body');
-      cardBody.find('.card-text').hide();
-      cardBody.find('.' + target).show();
-    });
-  });
-  
-</script>
     <!-- Template Javascript -->
-    <script src="js/main.js">
-    </script>
-</body>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          axios.get('http://localhost:8088/produit/getAll/withoutCategorie/withoutPhotos')
+            .then(response => {
+              const products = response.data;
+              const container = document.getElementById('carousel-inner');
+              const paginationContainer = document.querySelector('.custom-pagination');
+              container.innerHTML = '';
+              paginationContainer.innerHTML = '';
 
+              let slides = [];
+              for (let i = 0; i < products.length; i += 15) {
+                slides.push(products.slice(i, i + 15));
+              }
+
+              slides.forEach((slideProducts, index) => {
+                let slideDiv = document.createElement('div');
+                slideDiv.className = `carousel-item ${index === 0 ? 'active' : ''}`;
+
+                for (let j = 0; j < 3; j++) {
+                  let rowDiv = document.createElement('div');
+                  rowDiv.className = 'row sp justify-content-center align-items-center';
+
+                  for (let k = 0; k < 5; k++) {
+                    let productIndex = j * 5 + k;
+                    if (productIndex < slideProducts.length) {
+                      let product = slideProducts[productIndex];
+                      let productCard = `
+                        <div class="siWajih margin">
+                          <div class="card small-square-card custom-card">
+                            <a href="single-product.html?productId=${product.id}"><img src="data:image/jpeg;base64,${product.thumbnail}" class="card-img-top" alt="Product Image"></a>
+                            <div class="card-body">
+                              <h5 class="card-title">${product.nom}</h5>
+                              <div class="price-info" id="price-${product.id}">
+                                <!-- Price will be inserted here -->
+                              </div>
+                              <div class="grammages-container" id="grammages-${product.id}">
+                                <!-- Buttons and price info will be inserted here -->
+                              </div>
+                              <div class="basket-icon-wrapper">
+                                <i class="bi bi-basket2-fill basket-icon"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      `;
+
+                      rowDiv.innerHTML += productCard;
+                    }
+                  }
+
+                  slideDiv.appendChild(rowDiv);
+                }
+
+                container.appendChild(slideDiv);
+              });
+
+              paginationContainer.innerHTML = `
+                <a href="#productCarousel" role="button" data-bs-slide="prev">&laquo;</a>
+                ${slides.map((_, index) => `
+                  <span data-bs-target="#productCarousel" data-bs-slide-to="${index}" class="${index === 0 ? 'active' : ''}">${index + 1}</span>
+                `).join('')}
+                <a href="#productCarousel" role="button" data-bs-slide="next">&raquo;</a>
+              `;
+
+              products.forEach(product => {
+                const grammagesContainer = document.getElementById(`grammages-${product.id}`);
+                const priceDiv = document.getElementById(`price-${product.id}`);
+
+                if (product.prixList) {
+                  grammagesContainer.innerHTML = '';
+                  priceDiv.innerHTML = '';
+
+                  let minGrammage = Infinity;
+                  let minPrice = Infinity;
+
+                  product.prixList.forEach(priceItem => {
+                    grammagesContainer.innerHTML += `
+                      <button class="btn btn-outline-dark btn-sm grammage-button" data-price="${priceItem.prix}" data-grammage="${priceItem.grammage}" data-remise="${priceItem.remise}"  data-qtt="${priceItem.qtt}">${priceItem.grammage}g</button>
+                    `;
+
+                    const grammage = parseInt(priceItem.grammage);
+                    const price = parseFloat(priceItem.prix);
+                    if (grammage < minGrammage) {
+                      minGrammage = grammage;
+                      minPrice = price;
+                    }
+                  });
+
+                  priceDiv.innerHTML = `<p style="color: black; font-size: medium;">À <span style="color: black;font-weight: bold;">${minPrice}DT</span></p>`;
+                  priceDiv.style.display = 'block';
+
+                  document.querySelectorAll(`#grammages-${product.id} .grammage-button`).forEach(button => {
+                    button.addEventListener('click', function() {
+                      document.querySelectorAll(`#grammages-${product.id} .grammage-button`).forEach(btn => {
+                        btn.classList.remove('btn-selected');
+                      });
+
+                      this.classList.add('btn-selected');
+
+                      const price = parseFloat(this.getAttribute('data-price'));
+                      const grammage = this.getAttribute('data-grammage');
+                      const remise = parseFloat(this.getAttribute('data-remise'));
+                      const qtt = parseInt(this.getAttribute('data-qtt'));
+
+                      const discountedPrice = price - (price * (remise / 100));
+                      if (qtt === 0) {
+                        priceDiv.innerHTML = `<p class="sold-out">Solde Out</p>`;
+                      } else {
+                        if (remise === 0) {
+                          priceDiv.innerHTML = `<p style="color: black; font-size: medium;">À <span style="color: black;font-weight: bold;">${price}DT</span></p>`;
+                        } else {
+                          priceDiv.innerHTML = `<p style="color: black; font-size: medium;">De <span style="color: grey; text-decoration: line-through;">${price}DT</span> à <span style="color: black;font-weight: bold;">${discountedPrice}DT</span></p>`;
+                        }
+                        priceDiv.style.display = 'block';
+                      }
+                    });
+                  });
+                }
+              });
+
+            })
+            .catch(error => {
+              console.error('Erreur lors de la récupération des produits:', error);
+            });
+        });
+
+
+      </script>
+</body>
 </html>

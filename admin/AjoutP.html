@@ -119,11 +119,11 @@
                         <textarea class="form-control" id="description" name="description" rows="3"
                             placeholder="Entrez la description du produit"></textarea>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="qtt">Quantité</label>
                         <input type="number" class="form-control" id="qtt" name="qtt"
                             placeholder="Entrez la quantité du produit" required>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="thumbnail">vignette du produit</label>
                         <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" required>
@@ -132,16 +132,16 @@
                         <label for="photos">Image du produit</label>
                         <input type="file" class="form-control-file" id="photos" name="photos" multiple required>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="remise">Remise</label>
                         <input type="number" class="form-control" id="remise" name="remise" value="0"
                             placeholder="Entrez la remise du produit" required>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="form-col">
                     <div class="form-group">
                         <label for="categorie">Catégorie</label>
-                        <select class="form-control" id="categorie" name="categorie" required>
+                        <select class="form-control" id="categorie" name="categorieId" required>
                             <option value="" disabled selected>Select a category</option>
 
                         </select>
@@ -152,6 +152,10 @@
                             <input type="number" class="form-control input" name="grammage" placeholder="Grammage"
                                 step="0.01" required>
                             <input type="number" class="form-control input" name="prix" placeholder="Prix" step="0.01"
+                                required><br>
+                            <input type="number" class="form-control input" name="qtt" placeholder="qtt" step="0.01" 
+                                required>
+                            <input type="number" class="form-control input" name="remise" placeholder="remise" step="0.01"
                                 required>
                             <button type="button" class="btn btn-danger removePriceBtn">Supprimer</button>
                         </div>
@@ -204,6 +208,8 @@
                 newEntry.innerHTML = `
                     <input type="number" class="form-control input" name="grammage" placeholder="Grammage" step="0.01" required>
                     <input type="number" class="form-control input" name="prix" placeholder="Prix" step="0.01" required>
+                    <input type="number" class="form-control input" name="qtt" placeholder="qtt" step="0.01" required>
+                    <input type="number" class="form-control input" name="remise" placeholder="remise" step="0.01" required>
                     <button type="button" class="btn btn-danger removePriceBtn">Supprimer</button>
                 `;
                 prixListContainer.appendChild(newEntry);
@@ -224,7 +230,9 @@
 
                 const prixEntries = Array.from(document.querySelectorAll('.prixEntry')).map(entry => ({
                     grammage: parseFloat(entry.querySelector('input[name="grammage"]').value),
-                    prix: parseFloat(entry.querySelector('input[name="prix"]').value)
+                    prix: parseFloat(entry.querySelector('input[name="prix"]').value),
+                    qtt: parseFloat(entry.querySelector('input[name="qtt"]').value),
+                    remise: parseFloat(entry.querySelector('input[name="remise"]').value)
                 }));
 
                 formData.append('prixList', JSON.stringify(prixEntries));
@@ -237,15 +245,15 @@
                     };
 
                     // console log formData
-                    // for (let [key, value] of formData.entries()) {
-                    //     if (value instanceof File) {
-                    //         console.log(`${key}: ${value.name} (${value.size} bytes)`);
-                    //     } else {
-                    //         console.log(`${key}: ${value}`);
-                    //     }
-                    // }
+                    //for (let [key, value] of formData.entries()) {
+                     //   if (value instanceof File) {
+                     //       console.log(`${key}: ${value.name} (${value.size} bytes)`);
+                     //   } else {
+                       //     console.log(`${key}: ${value}`);
+                       // }
+                    //}
 
-                    const response = await axios.post('http://localhost:8088/produit/save', formData, { headers });
+                    const response = await axios.post('http://localhost:8088/produit/admin/save', formData, { headers });
 
                     if (response.status === 200) {
                         alert("Produit ajouté avec succès");
@@ -261,9 +269,9 @@
 
         async function loadCategories() {
             try {
-                const response = await axios.get('http://localhost:8088/categorie/getAll');
+                const response = await axios.get('http://localhost:8088/categorie/admin/getAllName');
                 const categories = response.data;
-
+                console.log(categories);
                 const categorieSelect = document.getElementById('categorie');
                 categories.forEach(cat => {
                     const option = document.createElement('option');

@@ -9,7 +9,6 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,6 +27,13 @@
     
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+        .btn-shadow {
+            box-shadow: 0 4px 8px #0c0c0c;
+            border: 1px solid #151515; 
+        }
+    </style>
+  
 </head>
 
 <body>
@@ -88,7 +94,6 @@
                 </div>
                 <a href="contact.html" class="nav-item nav-link">تواصل معنا</a>
             </div>
-            
         </div>
         <div>
             <a href="panier.html"><i class="bi bi-basket2-fill b1"></i></a>
@@ -100,12 +105,12 @@
     <!-- Page Header Start -->
     <div class="container-fluid page-header py-6 wow fadeIn" data-wow-delay="0.1s">
         <div class="container text-center pt-5 pb-3">
-            <h1 class="display-4 text-white animated slideInDown mb-3">Nom de Produit</h1>
+            <h1 class="display-4 text-white animated slideInDown mb-3" id="product-name">Nom de Produit</h1>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb justify-content-center mb-0">
                     <li class="breadcrumb-item"><a class="text-white" href="index.html">Home</a></li>
                     <li class="breadcrumb-item"><a class="text-white" href="product.html">Products</a></li>
-                    <li class="breadcrumb-item text-primary active" aria-current="page">Nom Produit</li>
+                    <li class="breadcrumb-item text-primary active" aria-current="page" id="product-name-breadcrumb">Nom de Produit</li>
                 </ol>
             </nav>
         </div>
@@ -118,41 +123,36 @@
             <div class="col-lg-6 d-flex flex-column flex-lg-row">
                 <div id="thumbnailContainer" class="d-flex flex-column mb-3 mb-lg-0">
                 </div>
+                <div style="width: 25px;"></div>
                 <div class="d-flex justify-content-center align-items-center h-100 flex-grow-1">
                     <img id="mainImage" class="img-fluid rounded product-image" src="img/product-1.jpg" alt="Nom de Produit">
                 </div>
             </div>
+
             <div class="col-md-6">
-                <h2>Nom de Produit</h2>
-                <p class="product-price">À partir de <span>48.000 DT</span></p>
+                <h2 id="product-name-detail">Nom de Produit</h2>
+                <p class="product-price">À partir de <span id="min-product-price" style="font-size: large; font-weight: bold;">48.000 DT</span></p>
                 <p><i><strong>Description :</strong></i></p>
-                <p>
-                    Le <strong>Nom de Produit</strong> est un véritable trésor de la nature, récolté à partir des nectars variés des fleurs sauvages qui poussent dans les prairies et les forêts. Sa saveur unique et délicate, légèrement florale, en fait un choix idéal pour les amateurs de miel à la recherche d'un goût authentique et naturel.
-                </p>
+                Le <strong id="nom-produit">Nom de Produit</strong> <span id="product-description"> est un véritable trésor de la nature, récolté à partir des nectars variés des fleurs sauvages qui poussent dans les prairies et les forêts. Sa saveur unique et délicate, légèrement florale, en fait un choix idéal pour les amateurs de miel à la recherche d'un goût authentique et naturel.
+                </span>
+           
                 <div class="card-body">
-                    <p style="color:black;font-size: small;"><strong>POIDS <span id="weightSpan"></span></strong></p>
-                    <p class="card-text description-1 active">
-                        <strong> 
-                            ابتداء من <span style="color: gray; text-decoration: line-through;">31,000 د.ت</span><span style="font-weight: bold;">25,000 د.ت</span>    
-                        </strong>
-                    </p>
-                    <p class="card-text description-2"><strong> 
-                        ابتداء من <span style="font-weight: bold;">65,000 د.ت</span>    
-                    </strong></p>
-                    <p class="card-text description-3">
-                        <strong> 
-                            ابتداء من <span style="color: gray; text-decoration: line-through;">500 د.ت</span><span style="font-weight: bold;">460 د.ت</span>    
-                        </strong>
-                    </p>
-                    <p>
-                        <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-1">350g</button>
-                        <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-2">500g</button>
-                        <button class="btn btn-outline-dark btn-sm toggle-description" data-target="description-3">1kg</button>
-                    </p>
+                    <p style="color:black;font-size: medium;"><strong>POIDS <span id="weightSpan"></span></strong></p>
+                    <p style="color: black; font-size: medium;" id="priceSR"> À <span id="product-price" style="color: black;font-weight: bold;"></span></p>
+                    <p style="color: black; font-size: medium;" id="priceWR">Prix: De <span id="product-price-sans-remise" style="color: grey; text-decoration: line-through;">450</span> à <span id="product-price-remise" style="color: black;font-weight: bold;">350</span></p>
+                    <div id="weightPriceContainer" class="d-flex flex-wrap">
+                        <!-- Les options de poids et prix seront insérées ici -->
+                    </div>
                 </div>
+    
                 <p><i><strong>Quantité :</strong></i></p>
-                <input class="btn btn-outline-primary" type="number" min="1" placeholder="1" style="width: 50px;height: 40px; background-color: white; color: black;">
+                <div class="input-group quantity-control mx-2" style="width: 90px;display: inline-flex;">
+                    <button class="btn btn-sm btn-primary btn-minus"><i class="fa fa-minus"></i></button>
+                    <input class="form-control border-0 text-center" id="quantityInput" type="text" value="1">
+                    <button class="btn btn-sm btn-primary btn-plus"><i class="fa fa-plus"></i></button>
+                </div>          
                 <button style="width: 300px;height: 40px; background-color: #EAA636;" class="btn">Ajouter Au Panier</button>
+
             </div>
         </div>
     </div>
@@ -182,7 +182,6 @@
                     <a class="btn btn-link" href="terms.html">Terms & Condition</a>
                     <a class="btn btn-link" href="support.html">Support</a>
                 </div>
-           
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Photo Gallery</h4>
                     <div class="row g-2">
@@ -214,9 +213,9 @@
     <!-- Copyright Start -->
     <div class="container-fluid copyright text-light py-4 wow fadeIn" data-wow-delay="0.1s">
         <div class="container">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy;2023 – <a href="#">Miel Galai</a>, Tous droits réservés.
-                </div> 
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                &copy;2023 – <a href="#">Miel Galai</a>, Tous droits réservés.
+            </div> 
         </div>
     </div>
     <!-- Copyright End -->
@@ -228,53 +227,142 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/wow/wow.min.js"></script>
-   
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const images = [
-                'img/product-1.jpg',
-                'img/product-2.jpg',
-                'img/product-1.jpg',
-                'img/product-2.jpg',
-                'img/product-3.jpg'
-            ];
-            const mainImage = document.getElementById('mainImage');
-            const thumbnailContainer = document.getElementById('thumbnailContainer');
-                function createThumbnail(src) {
-                const img = document.createElement('img');
-                img.src = src;
-                img.style.width = '100px'; 
-                img.style.height = 'auto';
-                img.style.cursor = 'pointer';
-                img.classList.add('thumbnail');
-                img.addEventListener('click', function() {
-                    mainImage.src = src;
+       document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('productId');
+        const weightSpan = document.getElementById('weightSpan');
+        const thumbnailContainer = document.getElementById('thumbnailContainer');
+        const weightPriceContainer = document.getElementById('weightPriceContainer');
+        const productPrice = document.getElementById('product-price');
+        const minProductPrice = document.getElementById('min-product-price');
+        const productPriceSansRemise = document.getElementById('product-price-sans-remise');
+        const productPriceRemise = document.getElementById('product-price-remise');
+        const priceSR = document.getElementById('priceSR');
+        const priceWR = document.getElementById('priceWR');
+        let selectedButton = null; 
+
+        axios.get(`http://localhost:8088/produit/getById/withoutCategorie/${productId}`)
+            .then(response => {
+                const product = response.data;
+                console.log('Product Data:', product);
+
+                // Update product details
+                document.getElementById('product-name').textContent = product.nom;
+                document.getElementById('product-description').textContent = product.description;
+                document.getElementById('product-name-breadcrumb').textContent = product.nom;
+                document.getElementById('product-name-detail').textContent = product.nom;
+                document.getElementById('nom-produit').textContent = product.nom;
+                document.getElementById('mainImage').src = `data:image/jpeg;base64,${product.thumbnail}`;
+                const images = product.photos;
+                weightPriceContainer.innerHTML = '';
+
+                let minPrice = Number.POSITIVE_INFINITY;
+                let minPriceGrammage = '';
+                let minPriceObject = null; 
+
+                product.prixList.forEach(prix => {
+                    const prixAvantRemise = prix.prix;
+                    const prixApresRemise = prixAvantRemise - (prixAvantRemise * prix.remise / 100.0);
+
+                    // Update minimum price
+                    if (prixApresRemise < minPrice) {
+                        minPrice = prixApresRemise;
+                        minPriceGrammage = prix.grammage;
+                        minPriceObject = prix; 
+                    }
+
+                    // Create and add button for each grammage
+                    const button = document.createElement('button');
+                    button.classList.add('btn', 'btn-outline-dark', 'btn-sm', 'm-1');
+                    button.textContent = `${prix.grammage}g`;
+
+                    button.addEventListener('click', () => {
+                        updatePriceDisplay(prixAvantRemise, prixApresRemise, prix.remise, prix.grammage, button);
+                    });
+
+                    weightPriceContainer.appendChild(button);
                 });
-                return img;
-            }
-            images.forEach(function(src) {
-                const thumbnail = createThumbnail(src);
-                thumbnailContainer.appendChild(thumbnail);
+
+                // Update minimum prices and select the corresponding button
+                minProductPrice.textContent = `${minPrice} DT`;
+                productPrice.textContent = `${minPrice} DT`;
+                weightSpan.textContent = minPriceGrammage;
+
+                // Automatically select the button for the minimum price
+                const buttons = weightPriceContainer.getElementsByTagName('button');
+                for (let button of buttons) {
+                    if (button.textContent === `${minPriceGrammage}g`) {
+                        button.classList.add('btn-shadow');
+                        selectedButton = button;
+                        updatePriceDisplay(minPriceObject.prix, minPrice, minPriceObject.remise, minPriceGrammage, button);
+                        break;
+                    }
+                }
+
+                function createThumbnail(src) {
+                    const img = document.createElement('img');
+                    img.src = `data:image/jpeg;base64,${src}`;
+                    img.style.width = '100px'; 
+                    img.style.height = 'auto';
+                    img.style.cursor = 'pointer';
+                    img.classList.add('thumbnail');
+                    img.addEventListener('click', function() {
+                        mainImage.src = `data:image/jpeg;base64,${src}`;
+                    });
+                    return img;
+                }
+
+                images.forEach(function(src) {
+                    const thumbnail = createThumbnail(src);
+                    thumbnailContainer.appendChild(thumbnail);
+                });
+
+            })
+            .catch(error => {
+                console.error('Error retrieving product details:', error);
             });
-        });
 
-           /boutton des grammage et prix/  
-        $('.card-text').not('.active').hide();
+        function updatePriceDisplay(prixAvantRemise, prixApresRemise, remise, grammage, button) {
+            if (selectedButton) {
+                selectedButton.classList.remove('btn-shadow');
+            }
+            button.classList.add('btn-shadow');
+            selectedButton = button; 
 
-        $('.toggle-description').click(function() {
-            var target = $(this).data('target');
-            var cardBody = $(this).closest('.card-body');
-            cardBody.find('.card-text').hide();
-            cardBody.find('.' + target).show();
-
-            $('.toggle-description').removeClass('active');
-            $(this).addClass('active');
-            var weightText = $(this).text();
-            $('#weightSpan').text(weightText);
-        });
+            // Update price display based on remise
+            if (remise > 0) {
+                productPriceSansRemise.textContent = `${prixAvantRemise} DT`;
+                productPriceRemise.textContent = `${prixApresRemise} DT`;
+                priceSR.style.display = 'none'; 
+                priceWR.style.display = 'block';
+            } else {
+                productPriceSansRemise.textContent = '';
+                productPriceRemise.textContent = '';
+                priceSR.style.display = 'block';
+                priceWR.style.display = 'none'; 
+            }
+            productPrice.textContent = `${prixApresRemise} DT`;
+            weightSpan.textContent = grammage;
+        }
+});
     </script>
-    
+    <script>
+            document.querySelector('.btn-minus').addEventListener('click', function() {
+                let quantityInput = document.getElementById('quantityInput');
+                let currentValue = parseInt(quantityInput.value);
+                if (currentValue > 1) {
+                    quantityInput.value = currentValue - 1;
+                }
+            });
 
+            document.querySelector('.btn-plus').addEventListener('click', function() {
+                let quantityInput = document.getElementById('quantityInput');
+                quantityInput.value = parseInt(quantityInput.value) + 1;
+            });
+    </script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
