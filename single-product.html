@@ -335,14 +335,12 @@
                 selectedButton = button;
     
                 if (qtt === 0) {
-                    // Hide price elements and show "Sur Commande"
                     priceQ.style.display = 'block';
                     productPriceSansRemise.style.display = 'none';
                     productPriceRemise.style.display = 'none';
                     priceSR.style.display = 'none';
                     priceWR.style.display = 'none';
                 } else {
-                    // Display price based on remise
                     priceQ.style.display = 'none';
                     productPriceSansRemise.style.display = '';
                     productPriceRemise.style.display = '';
