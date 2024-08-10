@@ -244,141 +244,217 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', async function() {
-          try {
-              const response = await axios.get('http://localhost:8088/produit/getAll/withoutCategorie/withoutPhotos');
-              const products = response.data;
-              const container = document.getElementById('carousel-inner');
-              const paginationContainer = document.querySelector('.custom-pagination');
-              container.innerHTML = '';
-              paginationContainer.innerHTML = '';
-  
-              let slides = [];
-              for (let i = 0; i < products.length; i += 15) {
-                  slides.push(products.slice(i, i + 15));
-              }
-  
-              slides.forEach((slideProducts, index) => {
-                  let slideDiv = document.createElement('div');
-                  slideDiv.className = `carousel-item ${index === 0 ? 'active' : ''}`;
-  
-                  for (let j = 0; j < 3; j++) {
-                      let rowDiv = document.createElement('div');
-                      rowDiv.className = 'row sp justify-content-center align-items-center';
-  
-                      for (let k = 0; k < 5; k++) {
-                          let productIndex = j * 5 + k;
-                          if (productIndex < slideProducts.length) {
-                              let product = slideProducts[productIndex];
-                              let productCard = `
-                                  <div class="siWajih margin">
-                                      <div class="card small-square-card custom-card">
-                                          <a href="single-product.html?productId=${product.id}"><img src="data:image/jpeg;base64,${product.thumbnail}" class="card-img-top" alt="Product Image"></a>
-                                          <div class="card-body">
-                                              <h6 class="card-title">${product.nom}</h6>
-                                              <div class="price-info" id="price-${product.id}">
-                                                  <!-- Price will be inserted here -->
-                                              </div>
-                                              <div class="grammages-container" id="grammages-${product.id}">
-                                                  <!-- Buttons and price info will be inserted here -->
-                                              </div>
-                                              <div class="basket-icon-wrapper">
-                                                  <i class="bi bi-basket2-fill basket-icon"></i>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              `;
-  
-                              rowDiv.innerHTML += productCard;
-                          }
-                      }
-  
-                      slideDiv.appendChild(rowDiv);
-                  }
-  
-                  container.appendChild(slideDiv);
-              });
-  
-              paginationContainer.innerHTML = `
-                  <a href="#productCarousel" role="button" data-bs-slide="prev">&laquo;</a>
-                  ${slides.map((_, index) => `
-                      <span data-bs-target="#productCarousel" data-bs-slide-to="${index}" class="${index === 0 ? 'active' : ''}">${index + 1}</span>
-                  `).join('')}
-                  <a href="#productCarousel" role="button" data-bs-slide="next">&raquo;</a>
-              `;
-  
-              products.forEach(product => {
-                  const grammagesContainer = document.getElementById(`grammages-${product.id}`);
-                  const priceDiv = document.getElementById(`price-${product.id}`);
-  
-                  if (product.prixList) {
-                      grammagesContainer.innerHTML = '';
-                      priceDiv.innerHTML = '';
-  
-                      let minGrammage = Infinity;
-                      let minPrice = Infinity;
-  
-                      product.prixList.forEach(priceItem => {
-                          grammagesContainer.innerHTML += `
-                              <button class="btn btn-outline-dark btn-sm grammage-button" data-price="${priceItem.prix}" data-grammage="${priceItem.grammage}" data-remise="${priceItem.remise}"  data-qtt="${priceItem.qtt}">${priceItem.grammage}g</button>
-                          `;
-  
-                          const grammage = parseInt(priceItem.grammage);
-                          const price = parseFloat(priceItem.prix);
-                          if (grammage < minGrammage) {
-                              minGrammage = grammage;
-                              minPrice = price;
-                          }
-                      });
-  
-                      // Show minimum price for product
-                      priceDiv.innerHTML = `<p style="color: black; font-size: medium;">À <span style="color: black;font-weight: bold;">${minPrice}DT</span></p>`;
-                      priceDiv.style.display = 'block';
-  
-                      // Select the minimum grammage button
-                      const minGrammageButton = Array.from(document.querySelectorAll(`#grammages-${product.id} .grammage-button`))
-                          .find(button => parseInt(button.getAttribute('data-grammage')) === minGrammage);
-  
-                      if (minGrammageButton) {
-                          minGrammageButton.classList.add('btn-selected');
-                      }
-  
-                      // Add click event listeners for grammage buttons
-                      document.querySelectorAll(`#grammages-${product.id} .grammage-button`).forEach(button => {
-                          button.addEventListener('click', function() {
-                              document.querySelectorAll(`#grammages-${product.id} .grammage-button`).forEach(btn => {
-                                  btn.classList.remove('btn-selected');
-                              });
-  
-                              this.classList.add('btn-selected');
-  
-                              const price = parseFloat(this.getAttribute('data-price'));
-                              const grammage = this.getAttribute('data-grammage');
-                              const remise = parseFloat(this.getAttribute('data-remise'));
-                              const qtt = parseInt(this.getAttribute('data-qtt'));
-  
-                              const discountedPrice = price - (price * (remise / 100));
-                              if (qtt === 0) {
-                                  priceDiv.innerHTML = `<p class="sold-out">Sur Commande </p>`;
-                              } else {
-                                  if (remise === 0) {
-                                      priceDiv.innerHTML = `<p style="color: black; font-size: medium;">À <span style="color: black;font-weight: bold;">${price}DT</span></p>`;
-                                  } else {
-                                      priceDiv.innerHTML = `<p style="color: black; font-size: medium;">De <span style="color: grey; text-decoration: line-through;">${price}DT</span> à <span style="color: black;font-weight: bold;">${discountedPrice}DT</span></p>`;
-                                  }
-                                  priceDiv.style.display = 'block';
-                              }
-                          });
-                      });
-                  }
-              });
-  
-          } catch (error) {
-              console.error('Erreur lors de la récupération des produits:', error);
-          }
-      });
-  </script>
-  
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                const response = await axios.get('http://localhost:8088/produit/getAll/withoutCategorie/withoutPhotos');
+                const products = response.data;
+                const container = document.getElementById('carousel-inner');
+                const paginationContainer = document.querySelector('.custom-pagination');
+                container.innerHTML = '';
+                paginationContainer.innerHTML = '';
+    
+                let slides = [];
+                for (let i = 0; i < products.length; i += 15) {
+                    slides.push(products.slice(i, i + 15));
+                }
+    
+                slides.forEach((slideProducts, index) => {
+                    let slideDiv = document.createElement('div');
+                    slideDiv.className = `carousel-item ${index === 0 ? 'active' : ''}`;
+    
+                    for (let j = 0; j < 3; j++) {
+                        let rowDiv = document.createElement('div');
+                        rowDiv.className = 'row sp justify-content-center align-items-center';
+    
+                        for (let k = 0; k < 5; k++) {
+                            let productIndex = j * 5 + k;
+                            if (productIndex < slideProducts.length) {
+                                let product = slideProducts[productIndex];
+                                let productCard = `
+                                    <div class="siWajih margin">
+                                        <div class="card small-square-card custom-card">
+                                            <a href="single-product.html?productId=${product.id}">
+                                                <img src="data:image/jpeg;base64,${product.thumbnail}" class="card-img-top" alt="Product Image" id="mainImage-${product.id}">
+                                            </a>
+                                            <div class="card-body">
+                                                <h6 class="card-title" id="product-name-${product.id}">${product.nom}</h6>
+                                                <div class="price-info" id="price-${product.id}">
+                                                    <!-- Price will be inserted here -->
+                                                </div>
+                                                <div class="grammages-container" id="grammages-${product.id}">
+                                                    <!-- Buttons and price info will be inserted here -->
+                                                </div>
+                                                <div class="basket-icon-wrapper" id="addToCartBtn-${product.id}">
+                                                    <i class="bi bi-basket2-fill basket-icon"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+    
+                                rowDiv.innerHTML += productCard;
+                            }
+                        }
+    
+                        slideDiv.appendChild(rowDiv);
+                    }
+    
+                    container.appendChild(slideDiv);
+                });
+    
+                paginationContainer.innerHTML = `
+                    <a href="#productCarousel" role="button" data-bs-slide="prev">&laquo;</a>
+                    ${slides.map((_, index) => `
+                        <span data-bs-target="#productCarousel" data-bs-slide-to="${index}" class="${index === 0 ? 'active' : ''}">${index + 1}</span>
+                    `).join('')}
+                    <a href="#productCarousel" role="button" data-bs-slide="next">&raquo;</a>
+                `;
+    
+                products.forEach(product => {
+                    const grammagesContainer = document.getElementById(`grammages-${product.id}`);
+                    const priceDiv = document.getElementById(`price-${product.id}`);
+                    
+                    if (product.prixList) {
+                        grammagesContainer.innerHTML = '';
+                        priceDiv.innerHTML = '';
+    
+                        let minGrammage = Infinity;
+                        let minPrice = Infinity;
+    
+                        product.prixList.forEach(priceItem => {
+                            grammagesContainer.innerHTML += `
+                                <button class="btn btn-outline-dark btn-sm grammage-button" data-price="${priceItem.prix}" data-grammage="${priceItem.grammage}" data-remise="${priceItem.remise}" data-qtt="${priceItem.qtt}" data-idprice="${priceItem.id}">${priceItem.grammage}g</button>
+                            `;
+    
+                            const grammage = parseInt(priceItem.grammage);
+                            const price = parseFloat(priceItem.prix);
+                            if (grammage < minGrammage) {
+                                minGrammage = grammage;
+                                minPrice = price;
+                            }
+                        });
+    
+                        priceDiv.innerHTML = `<p style="color: black; font-size: medium;">À <span style="color: black;font-weight: bold;">${minPrice}DT</span></p>`;
+                        priceDiv.style.display = 'block';
+    
+                        const minGrammageButton = Array.from(document.querySelectorAll(`#grammages-${product.id} .grammage-button`))
+                            .find(button => parseInt(button.getAttribute('data-grammage')) === minGrammage);
+    
+                        if (minGrammageButton) {
+                            minGrammageButton.classList.add('btn-selected');
+                        }
+    
+                        document.querySelectorAll(`#grammages-${product.id} .grammage-button`).forEach(button => {
+                            button.addEventListener('click', function() {
+                                document.querySelectorAll(`#grammages-${product.id} .grammage-button`).forEach(btn => {
+                                    btn.classList.remove('btn-selected');
+                                });
+    
+                                this.classList.add('btn-selected');
+    
+                                const price = parseFloat(this.getAttribute('data-price'));
+                                const remise = parseFloat(this.getAttribute('data-remise'));
+                                const qtt = parseInt(this.getAttribute('data-qtt'));
+                                const idPrice = this.getAttribute('data-idprice'); 
+    
+                                const discountedPrice = price - (price * (remise / 100));
+                                const hasRemise = remise > 0;
+                                const isQuantityZero = qtt === 0;
+    
+                                if (isQuantityZero) {
+                                    if (hasRemise) {
+                                        priceDiv.innerHTML = `
+                                            <p style="color: black; font-size: medium;" >
+                                                De <span style="color: grey; text-decoration: line-through;">${price}DT</span> 
+                                                à <span style="color: black;font-weight: bold;">${discountedPrice}DT</span>
+                                            </p>
+                                            <p class="sold-out">Sur Commande</p>`;
+                                    } else {
+                                        priceDiv.innerHTML = `
+                                            <p style="color: black; font-size: medium;">
+                                                À <span style="color: black;font-weight: bold;">${price}DT</span>
+                                            </p>
+                                            <p class="sold-out">Sur Commande</p>`;
+                                    }
+                                } else {
+                                    if (hasRemise) {
+                                        priceDiv.innerHTML = `
+                                            <p style="color: black; font-size: medium;">
+                                                De <span style="color: grey; text-decoration: line-through;">${price}DT</span> 
+                                                à <span style="color: black;font-weight: bold;">${discountedPrice}DT</span>
+                                            </p>`;
+                                    } else {
+                                        priceDiv.innerHTML = `
+                                            <p style="color: black; font-size: medium;">
+                                                À <span style="color: black;font-weight: bold;">${price}DT</span>
+                                            </p>`;
+                                    }
+                                }
+    
+                                priceDiv.style.display = 'block';
+                            });
+                        });
+                    }
+    
+                    // Add to cart
+                    const addToCartButton = document.getElementById(`addToCartBtn-${product.id}`);
+                    addToCartButton.addEventListener('click', function() {
+                        const productName = document.getElementById(`product-name-${product.id}`).textContent;
+                        const productImageSrc = document.getElementById(`mainImage-${product.id}`).src;
+    
+                        const selectedButton = document.querySelector(`#grammages-${product.id} .grammage-button.btn-selected`);
+    
+                        if (!selectedButton) {
+                            alert('Veuillez sélectionner un grammage.');
+                            return;
+                        }
+    
+                        const idPrice = selectedButton.getAttribute('data-idprice');
+                        const remise = parseFloat(selectedButton.getAttribute('data-remise'));
+                        let productPrice;
+    
+                        if (remise > 0) {
+                            productPrice = parseFloat(selectedButton.getAttribute('data-price')) - (parseFloat(selectedButton.getAttribute('data-price')) * remise / 100);
+                        } else {
+                            productPrice = parseFloat(selectedButton.getAttribute('data-price'));
+                        }
+    
+                        const productDetails = {
+                            idProduct: product.id,
+                            name: productName,
+                            image: productImageSrc,
+                            idPrice: idPrice,
+                            price: productPrice.toFixed(2), 
+                            quantity: 1 
+                        };
+    
+                        console.log('Product Added to Cart:', productDetails);
+    
+                        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                        let existingProduct = cart.find(item => item.idProduct === product.id && item.idPrice === idPrice);
+    
+                        if (existingProduct) {
+                            existingProduct.quantity = (parseInt(existingProduct.quantity) + 1).toString();
+                        } else {
+                            cart.push(productDetails);
+                        }
+    
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        updateCartCount();
+                    });
+    
+                    function updateCartCount() {
+                        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                        let itemCount = cart.reduce((count, item) => count + parseInt(item.quantity), 0);
+                        document.querySelector('.qtt').textContent = itemCount;
+                    }
+                    updateCartCount();
+                });
+            } catch (error) {
+                console.error('Erreur lors de la récupération des produits:', error);
+            }
+        });
+    </script>
+    
 </body>
 </html>

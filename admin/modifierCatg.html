@@ -154,10 +154,9 @@
     <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
     <script src="../js/main.js"></script>
-
+    <script src="../js/Security.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async function () {
-            checkIfLoggedIn();
             const form = document.getElementById('categorieForm');
             const urlParams = new URLSearchParams(window.location.search);
             const categorieId = urlParams.get('categorieId');
@@ -206,16 +205,6 @@
                 }
             });
         });
-
-        function checkIfLoggedIn() {
-            const token = localStorage.getItem('adminToken');
-            if (!token) {
-                alert('Vous n\'êtes pas connecté !');
-                window.location.href = 'login.html';
-            } else {
-                console.log('Utilisateur connecté');
-            }
-        }
 
         document.getElementById('logout').addEventListener('click', () => {
             localStorage.removeItem('adminToken');

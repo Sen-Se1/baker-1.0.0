@@ -175,18 +175,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+  <script src="../js/Security.js"></script>
   <script>
-    function checkIfLoggedIn() {
-      const token = localStorage.getItem('adminToken');
-      if (token) {
-        alert('User is logged in');
-        window.location.href = 'PAdmin.html';
-      } else {
-        console.log('You are not logged in!');
-      }
-    }
-    checkIfLoggedIn();
     document.getElementById('loginForm').addEventListener('submit', async (event) => {
       event.preventDefault();
 

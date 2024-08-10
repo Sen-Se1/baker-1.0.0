@@ -180,24 +180,14 @@
     <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/Security.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            checkIfLoggedIn();
             loadCategories();
             initAddPriceButton();
             initProductFormSubmission();
         });
-
-        function checkIfLoggedIn() {
-            const token = localStorage.getItem('adminToken');
-            if (!token) {
-                alert('You are not logged in!');
-                window.location.href = 'login.html';
-            } else {
-                console.log('User is logged in');
-            }
-        }
-
+        
         function initAddPriceButton() {
             const addPriceBtn = document.getElementById('addPriceBtn');
             const prixListContainer = document.getElementById('prixListContainer');
