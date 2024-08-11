@@ -29,12 +29,29 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
- <style>
-    form{
-        width: 50%;
-    }
- </style>
-
+    <style>
+        .container {
+            width: 100%;
+        }
+        form {
+            width: 100%;
+        }
+        .resume {
+            padding: 20px;
+            width: 100%; /* Ajusté pour remplir la colonne */
+        }
+        .summary {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .col-lg-6, .col-lg-4 {
+            padding: 15px;
+        }
+        .d-flex {
+            display: flex;
+            align-items: center;
+        }
+       
+    </style>
 </head>
 
 <body>
@@ -52,20 +69,17 @@
                     <p class="text-light fs-7 mb-0 me-2" style="font-size: 15px;">
                         <i class="bi bi-telephone" style="color:#EAA636;"></i>&nbsp;&nbsp;(+216) 55 716 454
                     </p>
-
-                    <a class="btn-sm border-start rounded-0" style="color:white;" href="">
+                    <a class="btn-sm border-start rounded-0" style="color:white;" href="mailto:info@example.com">
                         <i class="bi bi-envelope" style="color:#EAA636;"></i>&nbsp;&nbsp;info@example.com
                     </a>
                 </div>
-
             </div>
-
             <div class="col-lg-6 px-5 text-end">
                 <div class="h-100 d-inline-flex align-items-center">
-                    <a class="btn-lg-square border-end rounded-0" href=""><i class="fab fa-facebook-f" style="color:white;"></i></a>
-                    <a class="btn-lg-square border-end rounded-0" href=""><i class="fab fa-twitter" style="color:white;"></i></a>
-                    <a class="btn-lg-square border-end rounded-0" href=""><i class="fab fa-linkedin-in" style="color:white;"></i></a>
-                    <a class="btn-lg-square pe-0" href=""><i class="fab fa-instagram" style="color:white;"></i></a>
+                    <a class="btn-lg-square border-end rounded-0" href="#"><i class="fab fa-facebook-f" style="color:white;"></i></a>
+                    <a class="btn-lg-square border-end rounded-0" href="#"><i class="fab fa-twitter" style="color:white;"></i></a>
+                    <a class="btn-lg-square border-end rounded-0" href="#"><i class="fab fa-linkedin-in" style="color:white;"></i></a>
+                    <a class="btn-lg-square pe-0" href="#"><i class="fab fa-instagram" style="color:white;"></i></a>
                 </div>
             </div>
         </div>
@@ -75,7 +89,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
         <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
-            <h1 class="text-primary m-0"><img style="height: 60px;" src="img/logoPng1.png" alt="" srcset=""></h1>
+            <h1 class="text-primary m-0"><img style="height: 60px;" src="img/logoPng1.png" alt="Logo"></h1>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -96,11 +110,10 @@
                 </div>
                 <a href="contact.html" class="nav-item nav-link">تواصل معنا</a>
             </div>
-
         </div>
         <div>
             <a href="panier.html"><i class="bi bi-basket2-fill b1"></i></a>
-            <span class="qtt">1</span>
+            <span class="qtt">0</span>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -108,12 +121,12 @@
     <!-- Page Header Start -->
     <div class="container-fluid page-header py-6 wow fadeIn" data-wow-delay="0.1s">
         <div class="container text-center pt-5 pb-3">
-            <h1 class="display-4 text-white animated slideInDown mb-3">Panier</h1>
-            <nav aria-label="breadcrumb animated slideInDown">
+            <h1 class="display-4 text-white animated slideInDown mb-3">Passer vos commandes</h1>
+            <nav aria-label="breadcrumb" class="animated slideInDown">
                 <ol class="breadcrumb justify-content-center mb-0">
                     <li class="breadcrumb-item"><a class="text-white" href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="product.html">Products</a></li>
-                    <li class="breadcrumb-item text-primary active" aria-current="page">Panier</li>
+                    <li class="breadcrumb-item"><a class="text-white" href="panier.html">Panier</a></li>
+                    <li class="breadcrumb-item text-primary active" aria-current="page">Passer vos commandes</li>
                 </ol>
             </nav>
         </div>
@@ -122,83 +135,94 @@
 
     <!-- Commande Start -->
     <div class="container mt-5">
-        <h2>Créer une Commande</h2>
-        <form id="orderForm">
-            <div class="form-group">
-                <label for="nom">Nom</label>
-                <input type="text" class="form-control" id="nom" name="nom" required>
-                <div class="invalid-feedback">
-                    Le nom est obligatoire.
-                </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <form id="orderForm" class="needs-validation" novalidate>
+                    <h2>Adress de Livraison</h2>
+                    <div class="form-group mb-3">
+                        <label for="nom">Nom</label>
+                        <input type="text" class="form-control" id="nom" name="nom" required>
+                        <div class="invalid-feedback">
+                            Le nom est obligatoire.
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" class="form-control" id="prenom" name="prenom" required>
+                        <div class="invalid-feedback">
+                            Le prénom est obligatoire.
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="adresse">Adresse</label>
+                        <input type="text" class="form-control" id="adresse" name="adresse" required>
+                        <div class="invalid-feedback">
+                            L'adresse est obligatoire.
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="pays">Pays</label>
+                                <select type="text" class="form-control" id="pays" name="pays" required>
+                                    <option value="" disabled selected>Select pays</option>
+                                    <option >Tunisie</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Le pays est obligatoire.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="ville">Ville</label>
+                                <select class="form-control" id="ville" name="ville" required>
+                                    <option value="" disabled selected>Choisissez une ville</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    La ville est obligatoire.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="codePostal">Code Postal</label>
+                                <input type="number" class="form-control" id="codePostal" name="codePostal" min="1000" max="99999" required>
+                                <div class="invalid-feedback">
+                                    Le code postal doit avoir au moins 4 chiffres et ne pas dépasser 5 chiffres.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="numeroTelephone">Numéro de Téléphone</label>
+                                <input type="tel" class="form-control" id="numeroTelephone" name="numeroTelephone" pattern="\d{8}" required>
+                                <div class="invalid-feedback">
+                                    Le numéro de téléphone doit avoir exactement 8 chiffres.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Commander</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="prenom">Prénom</label>
-                <input type="text" class="form-control" id="prenom" name="prenom" required>
-                <div class="invalid-feedback">
-                    Le prénom est obligatoire.
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="adresse">Adresse</label>
-                <input type="text" class="form-control" id="adresse" name="adresse" required>
-                <div class="invalid-feedback">
-                    L'adresse est obligatoire.
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 form-group">
-                    <label for="pays">Pays</label>
-                    <input type="text" class="form-control" id="pays" name="pays" required>
-                    <div class="invalid-feedback">
-                        Le pays est obligatoire.
+            <div class="col-lg-6">
+                <div class="resume bg-white p-4">
+                    <div class="card summary">
+                        <div class="card-header">
+                            Récapitulatif de la commande
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex mb-2">
+                                <h5><span class="qtt1">1 </span>&nbsp; Articles dans le panier</h5>
+                            </div>
+                            <hr>
+                            <div class=" card-body" id="cartItems" >
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6 form-group">
-                    <label for="ville">Ville</label>
-                    <input type="text" class="form-control" id="ville" name="ville" required>
-                    <div class="invalid-feedback">
-                        La ville est obligatoire.
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 form-group">
-                    <label for="codePostal">Code Postal</label>
-                    <input type="number" class="form-control" id="codePostal" name="codePostal" min="1000" max="9999" required>
-                    <div class="invalid-feedback">
-                        Le code postal doit avoir au moins 4 chiffres et ne pas dépasser 5 chiffres.
-                    </div>
-                </div>
-                <div class="col-md-6 form-group">
-                    <label for="numeroTelephone">Numéro de Téléphone</label>
-                    <input type="tel" class="form-control" id="numeroTelephone" name="numeroTelephone" pattern="\d{8}" required>
-                    <div class="invalid-feedback">
-                        Le numéro de téléphone doit avoir exactement 8 chiffres.
-                    </div>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Envoyer</button>
-        </form>
-        <div class="col-lg-4 bg-white resume" style="height: 50%;">
-            <div class="card summary">
-                <div class="card-header  ">
-                    Résumé
-                </div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-between mb-2">
-                        <span>Sous-total</span>
-                        <span id="sousTotale">50,000DT</span>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <span>Livraison (Livraison à domicile)</span>
-                        <span>7,000DT</span>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-between font-weight-bold">
-                        <strong><span>Total de la commande</span></strong>
-                        <strong><span id="Totale">57,000DT</span></strong>
-                    </div>
-                    <a href="commande.html"><button class="btn btn-warning mt-3 checkout-btn">Commander</button></a>
                 </div>
             </div>
         </div>
@@ -210,28 +234,27 @@
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Office Address</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                    <h4 class="text-light mb-4">Adresse du Bureau</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Rue, New York, USA</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
                     <div class="d-flex pt-2">
-                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href="#"><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-0" href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Quick Links</h4>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Our Services</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">Support</a>
+                    <h4 class="text-light mb-4">Liens Rapides</h4>
+                    <a class="btn btn-link" href="#">À Propos</a>
+                    <a class="btn btn-link" href="#">Contact</a>
+                    <a class="btn btn-link" href="#">Nos Services</a>
+                    <a class="btn btn-link" href="#">Conditions Générales</a>
+                    <a class="btn btn-link" href="#">Support</a>
                 </div>
-
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Photo Gallery</h4>
+                    <h4 class="text-light mb-4">Galerie Photos</h4>
                     <div class="row g-2">
                         <div class="col-4">
                             <img class="img-fluid bg-light rounded p-1" src="img/product-1.jpg" alt="Image">
@@ -279,9 +302,116 @@
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/counterup/counterup.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script>
+        (function () {
+            'use strict'
+
+            var forms = document.querySelectorAll('.needs-validation')
+
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+
+        const villes = [
+            "Tunis", "Sfax", "Sousse", "Gabès", "Bizerte", "Ariana", "Kairouan", 
+            "Gafsa", "Monastir", "Medenine", "Nabeul", "Ben Arous", "Kasserine", 
+            "Sidi Bouzid", "Mahdia", "Jendouba", "Kef", "Siliana", "Beja", 
+            "Zaghouan", "Tozeur", "Kebili", "Tataouine", "Manouba", "Douz", "Hammamet"
+        ];
+
+        const selectVille = document.getElementById('ville');
+        villes.forEach(ville => {
+            const option = document.createElement('option');
+            option.value = ville;
+            option.textContent = ville;
+            selectVille.appendChild(option);
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const cart = JSON.parse(localStorage.getItem('cart'));
+    
+            const cartItemsContainer = document.getElementById('cartItems');
+    
+            if (cart && cart.length > 0) {
+                cart.forEach(product => {
+                    const productItem = `
+                        <div class="d-flex mb-2">
+                            <img src="${product.image}" alt="${product.name}" style="width: 15%;">
+                            <div class="ms-3" style="font-size:12px">
+                                <p><span>${product.name}</span> <br>
+                                <span>Qté : ${product.quantity}</span><br>
+                                <span>Prix : ${product.price} TND</span></p>
+                            </div>
+                        </div>
+                    `;
+                    cartItemsContainer.insertAdjacentHTML('beforeend', productItem);
+                });
+            } else {
+                cartItemsContainer.innerHTML = "<p>Votre panier est vide.</p>";
+            }
+            function updateCartCount() {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                let itemCount = cart.length;
+                document.querySelector('.qtt').textContent = itemCount;
+                document.querySelector('.qtt1').textContent = itemCount;
+
+            }
+            updateCartCount()
+        });
+        document.getElementById('orderForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            const formData = {
+                nom: document.getElementById('nom').value,
+                prenom: document.getElementById('prenom').value,
+                adresse: document.getElementById('adresse').value,
+                pays: document.getElementById('pays').value,
+                ville: document.getElementById('ville').value,
+                codePostal: document.getElementById('codePostal').value,
+                numeroTelephone: document.getElementById('numeroTelephone').value,
+            };
+
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            const lignesCommande = cart.map(product => ({
+                produitId: product.idProduct,  
+                prixId: product.idPrice,
+                qtt: product.quantity   
+            }));
+
+            const orderData = {
+                ...formData,
+                lignesCommande: lignesCommande
+            };
+            console.log(orderData);
+
+            axios.post('http://localhost:8088/commande/save', orderData)
+            .then(response => {
+                console.log('Order successfully submitted:', response.data);
+                
+                document.getElementById('orderForm').reset();
+                localStorage.removeItem('cart');
+                alert('Votre commande a été passée avec succès !');
+            })
+            .catch(error => {
+                console.error('There was an error submitting the order:', error);
+            });
+        });
+
+    </script>
 </body>
 
 </html>

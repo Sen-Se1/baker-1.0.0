@@ -118,8 +118,11 @@
     <!-- Page Header End -->
 
     <!--Détail produit start-->
+    
     <div class="container product-container">
+       
         <div class="row">
+            
             <div class="col-lg-6 d-flex flex-column flex-lg-row">
                 <div id="thumbnailContainer" class="d-flex flex-column mb-3 mb-lg-0">
                 </div>
@@ -130,6 +133,8 @@
             </div>
 
             <div class="col-md-6">
+                <div class="alert-box success" id="alert-success"></div>
+                <div class="alert-box warning" id="alert-warning"></div>
                 <h2 id="product-name-detail">Nom de Produit</h2>
                 <p class="product-price">À partir de <span id="min-product-price" style="font-size: large; font-weight: bold;">48.000 DT</span><span style="font-size: large; font-weight: bold;">DT</span></p>
                 <p><i><strong>Description :</strong></i></p>
@@ -139,15 +144,14 @@
                 <div class="card-body">
                     <p style="color:black;font-size: medium;"><strong>POIDS <span id="weightSpan"></span></strong></p>
                     <p style="color: black; font-size: medium;" id="priceSR"> À <span id="product-price" style="color: black;font-weight: bold;"></span><span style="color: black;font-weight: bold;">DT</span></p>
-                    <p style="color: black; font-size: medium; font-weight: bold;" id="priceQ">Sur Commande</p>
                     <p style="color: black; font-size: medium;" id="priceWR">De <span id="product-price-sans-remise" style="color: grey; text-decoration: line-through;">450</span><span  style="color: grey; text-decoration: line-through;">DT</span> à <span id="product-price-remise" style="color: black;font-weight: bold;">350</span><span style="color: black;font-weight: bold;">DT</span></p>
+                    <p style="color:#EAA636; font-size: medium; " id="priceQ">Non disponible</p>
                     <div id="weightPriceContainer" class="d-flex flex-wrap">
-                        <!-- Les options de poids et prix seront insérées ici -->
                     </div>
                 </div>
     
                 <p><i><strong>Quantité :</strong></i></p>
-                <div class="input-group quantity-control mx-2" style="width: 90px;display: inline-flex;">
+                <div class="input-group quantity-control mx-2" style="width: 100px;display: inline-flex;">
                     <button class="btn btn-sm btn-primary btn-minus"><i class="fa fa-minus"></i></button>
                     <input class="form-control border-0 text-center" id="quantityInput" type="text" value="1">
                     <button class="btn btn-sm btn-primary btn-plus"><i class="fa fa-plus"></i></button>
@@ -229,7 +233,7 @@
     <script src="lib/wow/wow.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
             const urlParams = new URLSearchParams(window.location.search);
             const productId = urlParams.get('productId');
             let selectedButtonId = null;
@@ -245,82 +249,81 @@
             const priceQ = document.getElementById('priceQ');
             let selectedButton = null;
     
-            axios.get(`http://localhost:8088/produit/getById/withoutCategorie/${productId}`)
-                .then(response => {
-                    const product = response.data;
-                    console.log('Product Data:', product);
+            try {
+                const response = await axios.get(`http://localhost:8088/produit/getById/withoutCategorie/${productId}`);
+                const product = response.data;
+                console.log('Product Data:', product);
     
-                    document.getElementById('product-name').textContent = product.nom;
-                    document.getElementById('product-description').textContent = product.description;
-                    document.getElementById('product-name-breadcrumb').textContent = product.nom;
-                    document.getElementById('product-name-detail').textContent = product.nom;
-                    document.getElementById('nom-produit').textContent = product.nom;
-                    document.getElementById('mainImage').src = `data:image/jpeg;base64,${product.thumbnail}`;
+                // Update product details
+                document.getElementById('product-name').textContent = product.nom;
+                document.getElementById('product-description').textContent = product.description;
+                document.getElementById('product-name-breadcrumb').textContent = product.nom;
+                document.getElementById('product-name-detail').textContent = product.nom;
+                document.getElementById('nom-produit').textContent = product.nom;
+                document.getElementById('mainImage').src = `data:image/jpeg;base64,${product.thumbnail}`;
     
-                    const images = product.photos;
-                    weightPriceContainer.innerHTML = '';
+                const images = product.photos;
+                weightPriceContainer.innerHTML = '';
     
-                    let minPrice = Number.POSITIVE_INFINITY;
-                    let minPriceGrammage = '';
-                    let minPriceObject = null;
+                let minPrice = Number.POSITIVE_INFINITY;
+                let minPriceGrammage = '';
+                let minPriceObject = null;
     
-                    product.prixList.forEach(prix => {
-                        const prixAvantRemise = prix.prix;
-                        const prixApresRemise = prixAvantRemise - (prixAvantRemise * prix.remise / 100.0);
+                product.prixList.forEach(prix => {
+                    const prixAvantRemise = prix.prix;
+                    const prixApresRemise = prixAvantRemise - (prixAvantRemise * prix.remise / 100.0);
     
-                        if (prixApresRemise < minPrice) {
-                            minPrice = prixApresRemise;
-                            minPriceGrammage = prix.grammage;
-                            minPriceObject = prix;
-                        }
-    
-                        const button = document.createElement('button');
-                        button.classList.add('btn', 'btn-outline-dark', 'btn-sm', 'm-1');
-                        button.textContent = `${prix.grammage}g`;
-    
-                        button.addEventListener('click', () => {
-                            updatePriceDisplay(prixAvantRemise, prixApresRemise, prix.remise, prix.grammage, prix.qtt, prix.id, button);
-                        });
-    
-                        weightPriceContainer.appendChild(button);
-                    });
-    
-                    minProductPrice.textContent = `${minPrice}`;
-                    productPrice.textContent = `${minPrice}`;
-                    weightSpan.textContent = minPriceGrammage;
-    
-                    const buttons = weightPriceContainer.getElementsByTagName('button');
-                    for (let button of buttons) {
-                        if (button.textContent === `${minPriceGrammage}g`) {
-                            button.classList.add('btn-shadow');
-                            selectedButton = button;
-                            updatePriceDisplay(minPriceObject.prix, minPrice, minPriceObject.remise, minPriceGrammage, minPriceObject.qtt, minPriceObject.id, button);
-                            break;
-                        }
+                    if (prixApresRemise < minPrice) {
+                        minPrice = prixApresRemise;
+                        minPriceGrammage = prix.grammage;
+                        minPriceObject = prix;
                     }
     
-                    function createThumbnail(src) {
-                        const img = document.createElement('img');
-                        img.src = `data:image/jpeg;base64,${src}`;
-                        img.style.width = '100px';
-                        img.style.height = 'auto';
-                        img.style.cursor = 'pointer';
-                        img.classList.add('thumbnail');
-                        img.addEventListener('click', function() {
-                            document.getElementById('mainImage').src = `data:image/jpeg;base64,${src}`;
-                        });
-                        return img;
-                    }
+                    const button = document.createElement('button');
+                    button.classList.add('btn', 'btn-outline-dark', 'btn-sm', 'm-1');
+                    button.textContent = `${prix.grammage}g`;
+                    button.setAttribute('data-qtt', prix.qtt);
     
-                    images.forEach(function(src) {
-                        const thumbnail = createThumbnail(src);
-                        thumbnailContainer.appendChild(thumbnail);
+                    button.addEventListener('click', () => {
+                        updatePriceDisplay(prixAvantRemise, prixApresRemise, prix.remise, prix.grammage, prix.qtt, prix.id, button);
                     });
     
-                })
-                .catch(error => {
-                    console.error('Error retrieving product details:', error);
+                    weightPriceContainer.appendChild(button);
                 });
+    
+                minProductPrice.textContent = `${minPrice}`;
+                productPrice.textContent = `${minPrice}`;
+                weightSpan.textContent = minPriceGrammage;
+    
+                Array.from(weightPriceContainer.getElementsByTagName('button')).forEach(button => {
+                    if (button.textContent === `${minPriceGrammage}g`) {
+                        button.classList.add('btn-shadow');
+                        selectedButton = button;
+                        updatePriceDisplay(minPriceObject.prix, minPrice, minPriceObject.remise, minPriceGrammage, minPriceObject.qtt, minPriceObject.id, button);
+                    }
+                });
+    
+                function createThumbnail(src) {
+                    const img = document.createElement('img');
+                    img.src = `data:image/jpeg;base64,${src}`;
+                    img.style.width = '100px';
+                    img.style.height = 'auto';
+                    img.style.cursor = 'pointer';
+                    img.classList.add('thumbnail');
+                    img.addEventListener('click', () => {
+                        document.getElementById('mainImage').src = `data:image/jpeg;base64,${src}`;
+                    });
+                    return img;
+                }
+    
+                images.forEach(src => {
+                    const thumbnail = createThumbnail(src);
+                    thumbnailContainer.appendChild(thumbnail);
+                });
+    
+            } catch (error) {
+                console.error('Error retrieving product details:', error);
+            }
     
             function updatePriceDisplay(prixAvantRemise, prixApresRemise, remise, grammage, qtt, id, button) {
                 if (selectedButton) {
@@ -333,32 +336,30 @@
                 const hasRemise = remise > 0;
                 const isQuantityZero = qtt === 0;
     
-                if (isQuantityZero) {
-                    priceQ.style.display = 'block';
-                    productPriceSansRemise.textContent = hasRemise ? `${prixAvantRemise}` : '';
-                    productPriceRemise.textContent = hasRemise ? `${prixApresRemise}` : '';
-                    priceSR.style.display = hasRemise ? 'none' : 'block';
-                    priceWR.style.display = hasRemise ? 'block' : 'none';
-                } else {
-                    priceQ.style.display = 'none';
-                    productPriceSansRemise.textContent = hasRemise ? `${prixAvantRemise}` : '';
-                    productPriceRemise.textContent = hasRemise ? `${prixApresRemise}` : '';
-                    priceSR.style.display = hasRemise ? 'none' : 'block';
-                    priceWR.style.display = hasRemise ? 'block' : 'none';
-                }
+                priceQ.style.display = isQuantityZero ? 'block' : 'none';
+                productPriceSansRemise.textContent = hasRemise ? `${prixAvantRemise}` : '';
+                productPriceRemise.textContent = hasRemise ? `${prixApresRemise}` : '';
+                priceSR.style.display = hasRemise ? 'none' : 'block';
+                priceWR.style.display = hasRemise ? 'block' : 'none';
     
                 productPrice.textContent = `${prixApresRemise}`;
                 weightSpan.textContent = grammage;
             }
     
-            // Ajouter au panier
+            // Add to cart
             const addToCartButton = document.getElementById('addToCartBtn');
-            addToCartButton.addEventListener('click', function() {
+            addToCartButton.addEventListener('click', () => {
                 const productName = document.getElementById('product-name').textContent;
                 const productImageSrc = document.getElementById('mainImage').src;
-                let productPriceText = document.getElementById('product-price').textContent.trim();
+                const productPriceText = document.getElementById('product-price').textContent.trim();
                 const quantity = document.getElementById('quantityInput').value;
-                let productPrice = parseFloat(productPriceText.replace(/[^\d.-]/g, ''));
+                const productPrice = parseFloat(productPriceText.replace(/[^\d.-]/g, ''));
+    
+                const qtt = selectedButton ? parseInt(selectedButton.getAttribute('data-qtt')) : 0;
+                if (qtt === 0) {
+                    afficherAlertWarning("Ce produit n'est pas disponible pour le moment.");
+                    return;
+                }
     
                 const productDetails = {
                     idProduct: productId,
@@ -382,34 +383,51 @@
     
                 localStorage.setItem('cart', JSON.stringify(cart));
                 updateCartCount();
+                afficherAlertSuccess("Vous avez ajouté le produit à votre panier.");
             });
     
             function updateCartCount() {
                 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                let itemCount = cart.length;
-                document.querySelector('.qtt').textContent = itemCount;
+                document.querySelector('.qtt').textContent = cart.length;
             }
             updateCartCount();
         });
     </script>
     
-        
-    <script>
-            document.querySelector('.btn-minus').addEventListener('click', function() {
-                let quantityInput = document.getElementById('quantityInput');
-                let currentValue = parseInt(quantityInput.value);
-                if (currentValue > 1) {
-                    quantityInput.value = currentValue - 1;
-                }
-            });
+     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btnPlus = document.querySelector('.btn-plus');
+            const btnMinus = document.querySelector('.btn-minus');
+            const quantityInput = document.getElementById('quantityInput');
 
-            document.querySelector('.btn-plus').addEventListener('click', function() {
-                let quantityInput = document.getElementById('quantityInput');
-                quantityInput.value = parseInt(quantityInput.value) + 1;
-            });
-    </script>
+            if (btnPlus && btnMinus && quantityInput) {
+                btnPlus.addEventListener('click', function() {
+                    let currentValue = parseInt(quantityInput.value, 10);
+
+                    if (isNaN(currentValue) || currentValue < 1) {
+                        currentValue = 1; 
+                    }
+
+                    quantityInput.value = currentValue + 1;
+                });
+
+                btnMinus.addEventListener('click', function() {
+                    let currentValue = parseInt(quantityInput.value, 10);
+
+                    if (isNaN(currentValue) || currentValue <= 1) {
+                        currentValue = 1; 
+                    } else {
+                        quantityInput.value = currentValue - 1;
+                    }
+                });
+            }
+        });
+
+     </script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="js/alert.js"></script>
+
 </body>
 
 </html>

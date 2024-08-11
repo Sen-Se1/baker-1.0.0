@@ -241,7 +241,7 @@
                         <strong><span>Total de la commande</span></strong>
                         <strong><span id="Totale">57,000DT</span></strong>
                     </div>
-                    <a href="commande.html"><button class="btn btn-warning mt-3 checkout-btn">Commander</button></a>
+                    <a href="commande.html?"><button class="btn btn-warning mt-3 checkout-btn">Commander</button></a>
                 </div>
             </div>
         </div>
@@ -364,7 +364,7 @@
                 });
 
                 sousTotaleElement.textContent = `${subTotal.toFixed(3)}DT`;
-                Total = subTotal + 7000;
+                Total = subTotal + 7.000;
                 TotaleElement.textContent = `${Total.toFixed(3)}DT`;
 
                 const deleteIcons = document.querySelectorAll('.bi-trash');
@@ -392,7 +392,12 @@
 
             await updateCartTable();
         });
-
+        function updateCartCount() {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                let itemCount = cart.length;
+                document.querySelector('.qtt').textContent = itemCount;
+            }
+            updateCartCount();
 
         
     </script>

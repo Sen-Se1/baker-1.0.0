@@ -178,10 +178,9 @@ h6,
     display: flex;
     width: 15px;
     height: 15px;
-    background-color: #EAA636;
     justify-content: center;
     align-items: center;
-    color: #FFFFFF;
+    color: #EAA636;
     border-radius: 50%;
     position: absolute;
     top: 30%;
@@ -788,4 +787,33 @@ height: 80%;
     #thumbnailContainer img {
         margin: 0 5px;
     }
+}
+
+.alert-box {
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;  
+}
+
+.success {
+    color: #ffff;
+    background-color: #EAA636;
+    border-color: #EAA636;
+    display: none;
+}
+
+.failure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+.warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+    display: none;
+    
 }
