@@ -35,7 +35,7 @@
             border-color: #333; 
         }
         .sold-out {
-            color: #1E1916;
+            color:#EAA636; font-size: medium;
 
         }
     </style>
@@ -657,7 +657,7 @@
                         const discountedPrice = price - (price * (remise / 100));
                         const priceDisplay = button.closest('.prodDetails').querySelector('.selected-price');
                         priceDisplay.innerHTML = qtt === 0
-                            ? `<p class="sold-out">Sur Commande</p>`
+                            ? `<p class="sold-out">Non disponible</p>`
                             : remise === 0
                             ? `<p style="color: black; font-size: medium;">À <span style="color: black;font-weight: bold;">${price}DT</span></p>`
                             : `<p style="color: black; font-size: medium;">De <span style="color: grey; text-decoration: line-through;">${price}DT</span> à <span style="color: black;font-weight: bold;">${discountedPrice}DT</span></p>`;
@@ -700,7 +700,7 @@
             alert('Failed to fetch order count. Check console for details.');
         });
     });
-    
+
         document.addEventListener('DOMContentLoaded', function() {
         axios.get('http://localhost:8088/produit/getCount')
         .then(response => {
