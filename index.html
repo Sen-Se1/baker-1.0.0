@@ -170,7 +170,7 @@
                     <div class="fact-item bg-light rounded text-center h-100 p-5">
                         <i class="fa fa-bread-slice fa-4x text-primary mb-4"></i>
                         <p class="mb-2">إجمالي المنتجات</p>
-                        <h1  class="display-5 mb-0" data-toggle="counter-up">35</h1>
+                        <h1 id="productCount"  class="display-5 mb-0" data-toggle="counter-up">35</h1>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.7s">
@@ -690,9 +690,23 @@
         document.addEventListener('DOMContentLoaded', function() {
         axios.get('http://localhost:8088/commande/getCount')
         .then(response => {
-            console.log('API response:', response); // Log the full response
-            const orderCount = response.data; // Adjust this if your response structure is different
+            console.log('API response:', response);
+            const orderCount = response.data;
             document.querySelector('#orderCount').textContent = orderCount;
+
+        })
+        .catch(error => {
+            console.error('There was an error fetching the order count:', error);
+            alert('Failed to fetch order count. Check console for details.');
+        });
+    });
+    
+        document.addEventListener('DOMContentLoaded', function() {
+        axios.get('http://localhost:8088/produit/getCount')
+        .then(response => {
+            console.log('API response:', response);
+            const productCount = response.data;
+            document.querySelector('#productCount').textContent = productCount;
 
         })
         .catch(error => {
