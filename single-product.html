@@ -135,6 +135,8 @@
             <div class="col-md-6">
                 <div class="alert-box success" id="alert-success"></div>
                 <div class="alert-box warning" id="alert-warning"></div>
+                <div class="alert-box failure" id="alert-failure"></div>
+
                 <h2 id="product-name-detail">Nom de Produit</h2>
                 <p class="product-price">À partir de <span id="min-product-price" style="font-size: large; font-weight: bold;">48.000 DT</span><span style="font-size: large; font-weight: bold;">DT</span></p>
                 <p><i><strong>Description :</strong></i></p>
@@ -360,6 +362,10 @@
                     afficherAlertWarning("Ce produit n'est pas disponible pour le moment.");
                     return;
                 }
+                if (quantity > qtt) {
+                    afficherAlertFailure("La quantité demandée dépasse la quantité maximale autorisée dans le panier.");
+                    return;
+                }
     
                 const productDetails = {
                     idProduct: productId,
@@ -367,6 +373,7 @@
                     image: productImageSrc,
                     idPrice: selectedButtonId,
                     price: productPrice.toFixed(2),
+                    qttP:qtt,
                     quantity: quantity
                 };
     

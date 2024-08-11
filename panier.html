@@ -187,6 +187,9 @@
     <!-- Page Header End -->
 
  <!-- Panier start -->
+ <div class="alert-box success" id="alert-success"></div>
+ <div class="alert-box warning" id="alert-warning"></div>
+ <div class="alert-box failure" id="alert-failure"></div>
  <div class="container mt-5 bg-light wow fadeInUp">
     <div class="row">
         <div class="col-lg-8">
@@ -241,7 +244,7 @@
                         <strong><span>Total de la commande</span></strong>
                         <strong><span id="Totale">57,000DT</span></strong>
                     </div>
-                    <a href="commande.html?"><button class="btn btn-warning mt-3 checkout-btn">Commander</button></a>
+                    <a href="commande.html"><button class="btn btn-warning mt-3 checkout-btn">Commander</button></a>
                 </div>
             </div>
         </div>
@@ -383,9 +386,15 @@
                 quantityInputs.forEach(input => {
                     const index = input.getAttribute('data-index');
                     const newQuantity = parseInt(input.value);
+                    const maxQuantity = products[index].qttP; 
+
+                    if (newQuantity > maxQuantity) {
+                        afficherAlertFailure("La quantité demandée dépasse la quantité maximale autorisée pour ce produit.");
+                        isValid = false; 
+                        return; 
+                    }
                     products[index].quantity = newQuantity;
                 });
-
                 await localStorage.setItem('cart', JSON.stringify(products));  
                 await updateCartTable();  
             });
@@ -405,6 +414,8 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js">
+    </script>
+    <script src="js/alert.js">
     </script>
 </body>
 

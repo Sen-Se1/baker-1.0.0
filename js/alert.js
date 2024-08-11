@@ -2,7 +2,7 @@
 function afficherAlertSuccess(message) {
 
     var alertSuccess = document.getElementById("alert-success");
-    alertSuccess.innerHTML = `<i class="bi bi-check"></i> &nbsp;&nbsp;${message}`;
+    alertSuccess.innerHTML = `<i class="bi bi-check2-circle"></i> &nbsp;&nbsp;${message}`;
     $(alertSuccess).fadeIn(300);
     setTimeout(function() {
         $(alertSuccess).fadeOut(400);
@@ -23,10 +23,14 @@ function afficherAlertWarning(message) {
     return message;
 }
 
-function afficherAlerteSucces() {
-    var alertSuccess = document.getElementById("alert-success");
-    $(alertSuccess).fadeIn(300);
+function afficherAlertFailure(message) {
+
+    var alertfailue = document.getElementById("alert-failure");
+    alertfailue.innerHTML = `<i class="bi bi-x-circle-fill"></i> &nbsp;&nbsp;${message}`;
+    $(alertfailue).fadeIn(300);
     setTimeout(function() {
-        $(alertSuccess).fadeOut(400);
-    }, 1500); 
+        $(alertfailue).fadeOut(400);
+    }, 3000); 
+
+    return message;
 }
