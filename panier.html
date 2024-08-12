@@ -233,7 +233,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between mb-2">
                         <span>Sous-total</span>
-                        <span id="sousTotale">50,000DT</span>
+                        <span id="sousTotale">0.000DT</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
                         <span>Livraison (Livraison à domicile)</span>
@@ -242,7 +242,7 @@
                     <hr>
                     <div class="d-flex justify-content-between font-weight-bold">
                         <strong><span>Total de la commande</span></strong>
-                        <strong><span id="Totale">57,000DT</span></strong>
+                        <strong><span id="Totale">0.000DT</span></strong>
                     </div>
                     <a href="commande.html"><button class="btn btn-warning mt-3 checkout-btn">Commander</button></a>
                 </div>
@@ -335,11 +335,15 @@
     <script>
         document.addEventListener('DOMContentLoaded', async function() {
             let products = JSON.parse(localStorage.getItem('cart')) || [];
+         
             const cartTableBody = document.querySelector('.cart-table');
             const sousTotaleElement = document.getElementById('sousTotale');
             const TotaleElement = document.getElementById('Totale');
             const updateCartBtn = document.querySelector('.update-cart-btn');
-
+            TotaleElement.textContent = `${Total.toFixed(3)}DT`;
+            if (cart.length === 0) {
+                TotaleElement.textContent = `0.000DT`;
+            }
             async function updateCartTable() {
                 cartTableBody.innerHTML = '';           
                 let subTotal = 0; 
