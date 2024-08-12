@@ -110,6 +110,7 @@ h6,
 
 .navbar .navbar-nav .nav-link:hover,
 .navbar .navbar-nav .nav-link.active {
+    font-weight: bold;
     color: var(--secondary);
 }
 
@@ -662,10 +663,16 @@ h6,
     margin-right: 5px;
     
 }
+.custom-btn{
+    margin: 0 !important;
+}
+#codeReduction{
+    height:inherit !important;
+}
 .grammage:hover{
     box-shadow: 0px 0px 7px gray;
     color: var(--primary);
-    background-color: var(--secondary);
+    background-color: var(--dark);
 
 }
 .quantite .a{

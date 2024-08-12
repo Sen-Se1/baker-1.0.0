@@ -259,7 +259,12 @@
 
         async function loadCategories() {
             try {
-                const response = await axios.get('http://localhost:8088/categorie/admin/getAllName');
+                const token = localStorage.getItem('adminToken');
+                const headers = {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data'
+                };
+                const response = await axios.get('http://localhost:8088/categorie/admin/getAllName',{ headers });
                 const categories = response.data;
                 console.log(categories);
                 const categorieSelect = document.getElementById('categorie');
